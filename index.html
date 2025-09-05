@@ -5,44 +5,144 @@
   <title>My Streamlit Apps</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #fafafa;
-      text-align: center;
-      padding: 40px;
-    }
-    h1 {
-      font-size: 2em;
-      margin-bottom: 20px;
-    }
-    .app-list {
-      list-style: none;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      margin: 0;
       padding: 0;
     }
-    .app-list li {
-      margin: 15px 0;
+
+    header {
+      background: #007acc;
+      color: #fff;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
-    .app-link {
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    header p {
+      margin-top: 8px;
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column; /* allow flexible vertical layout */
+      text-align: center;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      padding: 20px;
+      background: #f9fafb;
+    }
+
+    .card h2 {
+      margin: 15px 0 8px;
+      font-size: 1.3em;
+      color: #222;
+    }
+
+    .card p {
+      font-size: 0.95em;
+      padding: 0 15px;
+      margin: 0 0 15px;
+      color: #555;
+      flex-grow: 1; /* this makes description take up remaining space */
+    }
+
+    .card a {
       display: inline-block;
-      padding: 12px 20px;
-      background: #2c3e50;
-      color: white;
+      margin: 20px auto;
+      padding: 10px 18px;
+      background: #007acc;
+      color: #fff;
       text-decoration: none;
       border-radius: 6px;
       transition: background 0.3s;
     }
-    .app-link:hover {
-      background: #34495e;
+
+    .card a:hover {
+      background: #005fa3;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f1f3f5;
+      font-size: 0.9em;
+      color: #777;
     }
   </style>
 </head>
 <body>
-  <h1>🚀 My Streamlit Apps</h1>
-  <p>Click below to explore my projects:</p>
-  <ul class="app-list">
-    <li><a class="app-link" href="https://quickquery.streamlit.app/" target="_blank">App 1: Title</a></li>
-    <li><a class="app-link" href="https://askharsha.streamlit.app/" target="_blank">App 2: Title</a></li>
-    <li><a class="app-link" href="https://essential.streamlit.app/" target="_blank">App 3: Title</a></li>
-    <li><a class="app-link" href="https://hellojumbo.streamlit.app/" target="_blank">App 3: Title</a></li>
-  </ul>
+  <header>
+    <h1>🚀 My Streamlit Apps</h1>
+    <p>A showcase of the apps I’ve built</p>
+  </header>
+
+  <div class="container">
+    <!-- App 1 -->
+    <div class="card">
+      <img src="assets/Quickquery.png" alt="QuickQuery Logo">
+      <h2>QuickQuery</h2>
+      <p>Run SQL queries instantly with a clean UI.</p>
+      <a href="https://quickquery.streamlit.app" target="_blank">Open App</a>
+    </div>
+
+    <!-- App 2 -->
+    <div class="card">
+      <img src="assets/harsha_1.png" alt="AskHarsha Logo">
+      <h2>AskHarsha</h2>
+      <p>Your personal Q&A bot for instant answers.</p>
+      <a href="https://askharsha.streamlit.app" target="_blank">Open App</a>
+    </div>
+
+    <!-- App 3 -->
+    <div class="card">
+      <img src="assets/essential.png" alt="Essential Logo">
+      <h2>Essential</h2>
+      <p>Minimalist tool for daily essential tasks.</p>
+      <a href="https://essential.streamlit.app" target="_blank">Open App</a>
+    </div>
+
+    <!-- App 4 -->
+    <div class="card">
+      <img src="assets/default_elephant.png" alt="HelloJumbo Logo">
+      <h2>HelloJumbo</h2>
+      <p>Fun interactive app with smart features.</p>
+      <a href="https://hellojumbo.streamlit.app" target="_blank">Open App</a>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Harsha | Powered by GitHub Pages
+  </footer>
 </body>
 </html>
