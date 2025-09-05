@@ -88,6 +88,7 @@
       flex-direction: column;
       text-align: center;
       transition: transform 0.25s, box-shadow 0.25s;
+      overflow: hidden;
     }
 
     .card:hover {
@@ -101,6 +102,12 @@
       object-fit: contain;
       padding: 20px;
       background: #f9fafb;
+      border-bottom: 1px solid #eee;
+      transition: transform 0.4s ease; /* smooth zoom */
+    }
+
+    .card:hover img {
+      transform: scale(1.08); /* zoom effect */
     }
 
     .card h2 {
@@ -166,7 +173,7 @@
     <div class="card">
       <img src="assets/Quickquery.png" alt="QuickQuery Logo">
       <h2>QuickQuery</h2>
-      <p>Run SQL queries instantly with a clean UI.</p>
+      <p>Find Answers Inside Your Documents.</p>
       <a href="https://quickquery.streamlit.app" target="_blank">Open App</a>
     </div>
 
@@ -174,7 +181,7 @@
     <div class="card">
       <img src="assets/harsha_1.png" alt="AskHarsha Logo">
       <h2>AskHarsha</h2>
-      <p>Your personal Q&A bot for instant answers.</p>
+      <p>AskHarsha is my personal knowledge hub.</p>
       <a href="https://askharsha.streamlit.app" target="_blank">Open App</a>
     </div>
 
@@ -182,7 +189,7 @@
     <div class="card">
       <img src="assets/essential.png" alt="Essential Logo">
       <h2>Essential</h2>
-      <p>Minimalist tool for daily essential tasks.</p>
+      <p>Essential turns long documents into concise, understandable summaries, saving time and making it easier to grasp the key information.</p>
       <a href="https://essential.streamlit.app" target="_blank">Open App</a>
     </div>
 
@@ -190,7 +197,7 @@
     <div class="card">
       <img src="assets/default_elephant.png" alt="HelloJumbo Logo">
       <h2>HelloJumbo</h2>
-      <p>Fun interactive app with smart features.</p>
+      <p>A friend to listen, remember, and support you through whatever you're experiencing.</p>
       <a href="https://hellojumbo.streamlit.app" target="_blank">Open App</a>
     </div>
   </div>
