@@ -6,31 +6,71 @@
   <style>
     body {
       font-family: "Segoe UI", Arial, sans-serif;
-      background: #f5f7fa;
-      color: #333;
+      background: #f4f6f9;
       margin: 0;
       padding: 0;
+      color: #333;
     }
 
+    /* Navbar */
+    .navbar {
+      background: #222;
+      color: white;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar .logo {
+      font-size: 1.4em;
+      font-weight: bold;
+    }
+
+    .navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar ul li {
+      display: inline;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1em;
+      transition: color 0.2s;
+    }
+
+    .navbar ul li a:hover {
+      color: #00c3ff;
+    }
+
+    /* Page heading */
     header {
-      background: #007acc;
-      color: #fff;
-      padding: 30px 20px;
       text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      padding: 40px 20px;
     }
 
     header h1 {
-      margin: 0;
       font-size: 2.5em;
+      margin: 0;
     }
 
     header p {
       margin-top: 8px;
       font-size: 1.2em;
-      opacity: 0.9;
+      color: #555;
     }
 
+    /* App cards grid */
     .container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -45,7 +85,7 @@
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       display: flex;
-      flex-direction: column; /* allow flexible vertical layout */
+      flex-direction: column;
       text-align: center;
       transition: transform 0.25s, box-shadow 0.25s;
     }
@@ -74,7 +114,7 @@
       padding: 0 15px;
       margin: 0 0 15px;
       color: #555;
-      flex-grow: 1; /* this makes description take up remaining space */
+      flex-grow: 1;
     }
 
     .card a {
@@ -98,15 +138,29 @@
       background: #f1f3f5;
       font-size: 0.9em;
       color: #777;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🚀 My Streamlit Apps</h1>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">🚀 My Apps</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="https://github.com/sriharsha557" target="_blank">GitHub</a></li>
+      <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+      <li><a href="mailto:your-email@example.com">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Header -->
+  <header id="home">
+    <h1>My Streamlit Apps</h1>
     <p>A showcase of the apps I’ve built</p>
   </header>
 
+  <!-- App Cards -->
   <div class="container">
     <!-- App 1 -->
     <div class="card">
@@ -141,6 +195,7 @@
     </div>
   </div>
 
+  <!-- Footer -->
   <footer>
     © 2025 Harsha | Powered by GitHub Pages
   </footer>
