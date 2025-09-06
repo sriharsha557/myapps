@@ -653,8 +653,52 @@
         font-size: 40px;
       }
     }
+
+    /* Shimmer effect for subtitle */
+    .shimmer {
+      font-family: "Lato", sans-serif;
+      font-weight: 300;
+      font-size: 1.3em;
+      color: rgba(255, 255, 255, 0.1);
+      text-align: center;
+      display: inline-block;
+      background: linear-gradient(to right, #222 0%, #fff 50%, #222 100%);
+      background-size: 125px 100%;
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      background-color: #222;
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -moz-text-fill-color: transparent;
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: left top;
+      }
+      100% {
+        background-position: right top;
+      }
+    }
+
+    /* Responsive adjustments for shimmer text */
+    @media (max-width: 768px) {
+      .shimmer {
+        font-size: 1.1em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .shimmer {
+        font-size: 1em;
+      }
+    }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Anton:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Glowing dots grid background -->
@@ -686,7 +730,7 @@
       <span>A</span>
     </div>
     <h1>Turning Ideas Into Apps</h1>
-    <p>A stunning showcase of innovative applications</p>
+    <p class="shimmer">A stunning showcase of innovative applications</p>
   </section>
 
   <div class="container" id="apps">
@@ -726,6 +770,13 @@
       <a href="https://hellojumbo.streamlit.app" target="_blank" class="card-button">Open App</a>
     </div>
   </div>
+
+  <!-- LikeBtn.com BEGIN -->
+  <div style="text-align: center; padding: 20px 0; position: relative; z-index: 1;">
+    <span class="likebtn-wrapper" data-i18n_like="ShowLove" data-ef_voting="bounce" data-white_label="true" data-rich_snippet="true" data-identifier="love"></span>
+  </div>
+  <script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+  <!-- LikeBtn.com END -->
 
   <footer>
     © 2025 Harsha | Powered by GitHub Pages
