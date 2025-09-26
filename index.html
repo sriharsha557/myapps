@@ -660,18 +660,47 @@
     }
 
 /* HARSHA split text hover effect styles */
-    .harsha-container {
+    h2 {
+      margin: 0;
+      padding: 0;
       position: relative;
+      top: 50px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      font-size: 6em;
+      color: transparent;
+      text-transform: uppercase;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 800;
       text-align: center;
-      padding: 60px 20px;
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       z-index: 1;
     }
 
-    .harsha-text {
+    h2 span:nth-child(1) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #fff;
+      transition: 0.5s;
+      clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+      overflow: hidden;
+    }
+
+    h2:hover span:nth-child(1) {
+      transform: translateY(-18px);
+    }
+
+    h2 span:nth-child(2) {
+      position: absolute;
+      top:     /* HARSHA split text hover effect styles */
+    .harsha-split-effect {
+      position: relative;
+      text-align: center;
+      padding: 60px 20px;
+      z-index: 1;
+    }
+
+    .harsha-split-effect h2 {
       margin: 0;
       padding: 0;
       position: relative;
@@ -682,7 +711,7 @@
       font-weight: 800;
     }
 
-    .harsha-text span:nth-child(1) {
+    .harsha-split-effect h2 span:nth-child(1) {
       position: absolute;
       top: 0;
       left: 0;
@@ -692,11 +721,11 @@
       overflow: hidden;
     }
 
-    .harsha-text:hover span:nth-child(1) {
+    .harsha-split-effect h2:hover span:nth-child(1) {
       transform: translateY(-18px);
     }
 
-    .harsha-text span:nth-child(2) {
+    .harsha-split-effect h2 span:nth-child(2) {
       position: absolute;
       top: 0;
       left: 0;
@@ -706,11 +735,11 @@
       overflow: hidden;
     }
 
-    .harsha-text:hover span:nth-child(2) {
+    .harsha-split-effect h2:hover span:nth-child(2) {
       transform: translateY(18px);
     }
 
-    .harsha-text span:nth-child(3) {
+    .harsha-split-effect h2 span:nth-child(3) {
       position: absolute;
       top: 50%;
       left: 0;
@@ -728,45 +757,35 @@
       border-radius: 4px;
     }
 
-    .harsha-text:hover span:nth-child(3) {
+    .harsha-split-effect h2:hover span:nth-child(3) {
       transform: translateY(-50%) scaleY(1);
     }
 
     /* Responsive adjustments for HARSHA split text */
     @media (max-width: 768px) {
-      .harsha-text {
+      .harsha-split-effect h2 {
         font-size: 4em;
       }
       
-      .harsha-container {
-        height: 150px;
-        padding: 40px 20px;
-      }
-      
-      .harsha-text:hover span:nth-child(1) {
+      .harsha-split-effect h2:hover span:nth-child(1) {
         transform: translateY(-12px);
       }
       
-      .harsha-text:hover span:nth-child(2) {
+      .harsha-split-effect h2:hover span:nth-child(2) {
         transform: translateY(12px);
       }
     }
 
     @media (max-width: 480px) {
-      .harsha-text {
+      .harsha-split-effect h2 {
         font-size: 3em;
       }
       
-      .harsha-container {
-        height: 120px;
-        padding: 30px 15px;
-      }
-      
-      .harsha-text:hover span:nth-child(1) {
+      .harsha-split-effect h2:hover span:nth-child(1) {
         transform: translateY(-10px);
       }
       
-      .harsha-text:hover span:nth-child(2) {
+      .harsha-split-effect h2:hover span:nth-child(2) {
         transform: translateY(10px);
       }
     }
@@ -972,12 +991,14 @@
   </div>
 
   <!-- HARSHA Name with Glow Effect -->
-  <h2>
-    HARSHA 
-    <span> HARSHA </span>
-    <span> HARSHA </span>
-    <span>VibeCoder</span>
-  </h2>
+  <div class="harsha-split-effect">
+    <h2>
+      HARSHA 
+      <span> HARSHA </span>
+      <span> HARSHA </span>
+      <span>VibeCoder</span>
+    </h2>
+  </div>
 
   <!-- TextScramble Section -->
   <div class="text-scramble-container">
