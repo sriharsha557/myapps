@@ -659,44 +659,115 @@
       }
     }
 
-    /* HARSHA glow effect styles */
-    .harsha-glow {
-      background: 50% 100% / 50% 50% no-repeat radial-gradient(ellipse at bottom, #fff, transparent, transparent);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      font-size: 6vw;
-      font-family: "Source Sans Pro", sans-serif;
+/* HARSHA split text hover effect styles */
+    .harsha-container {
+      position: relative;
       text-align: center;
-      margin: 20px 0;
-      animation: reveal 3000ms ease-in-out forwards 200ms, glow 2500ms linear infinite 2000ms;
+      padding: 60px 20px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
     }
 
-    @keyframes reveal {
-      80% {
-        letter-spacing: 8px;
-      }
-      100% {
-        background-size: 300% 300%;
-      }
+    .harsha-text {
+      margin: 0;
+      padding: 0;
+      position: relative;
+      font-size: 6em;
+      color: transparent;
+      text-transform: uppercase;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 800;
     }
 
-    @keyframes glow {
-      40% {
-        text-shadow: 0 0 8px #fff;
-      }
+    .harsha-text span:nth-child(1) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #fff;
+      transition: 0.5s;
+      clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+      overflow: hidden;
     }
 
-    /* Responsive adjustments for HARSHA glow */
+    .harsha-text:hover span:nth-child(1) {
+      transform: translateY(-18px);
+    }
+
+    .harsha-text span:nth-child(2) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #fff;
+      transition: 0.5s;
+      clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+      overflow: hidden;
+    }
+
+    .harsha-text:hover span:nth-child(2) {
+      transform: translateY(18px);
+    }
+
+    .harsha-text span:nth-child(3) {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%) scaleY(0);
+      width: 91%;
+      color: #000;
+      background: #00e5ff;
+      font-size: 0.25em;
+      font-weight: 500;
+      letter-spacing: 0.7em;
+      text-align: center;
+      padding-left: 10px;
+      margin-left: 5px;
+      transition: 0.5s;
+      border-radius: 4px;
+    }
+
+    .harsha-text:hover span:nth-child(3) {
+      transform: translateY(-50%) scaleY(1);
+    }
+
+    /* Responsive adjustments for HARSHA split text */
     @media (max-width: 768px) {
-      .harsha-glow {
-        font-size: 8vw;
+      .harsha-text {
+        font-size: 4em;
+      }
+      
+      .harsha-container {
+        height: 150px;
+        padding: 40px 20px;
+      }
+      
+      .harsha-text:hover span:nth-child(1) {
+        transform: translateY(-12px);
+      }
+      
+      .harsha-text:hover span:nth-child(2) {
+        transform: translateY(12px);
       }
     }
 
     @media (max-width: 480px) {
-      .harsha-glow {
-        font-size: 10vw;
+      .harsha-text {
+        font-size: 3em;
+      }
+      
+      .harsha-container {
+        height: 120px;
+        padding: 30px 15px;
+      }
+      
+      .harsha-text:hover span:nth-child(1) {
+        transform: translateY(-10px);
+      }
+      
+      .harsha-text:hover span:nth-child(2) {
+        transform: translateY(10px);
       }
     }
 
