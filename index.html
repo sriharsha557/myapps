@@ -17,118 +17,199 @@
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #000;
+      background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 70%);
       min-height: 100vh;
       color: #fff;
       overflow-x: hidden;
       position: relative;
     }
 
-    /* Glowing dots grid background */
-    .glowing-grid {
+    /* Particle System Background */
+    .particle-container {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
       pointer-events: none;
-      display: grid;
-      grid-template-columns: repeat(20, 1fr);
-      grid-template-rows: repeat(15, 1fr);
-      gap: 0;
+      z-index: 0;
+      overflow: hidden;
     }
 
-    .grid-dot {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: all;
-    }
-
-    .grid-dot::before {
-      content: '';
+    .particle {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      height: 4px;
-      width: 4px;
       border-radius: 50%;
-      background: rgba(0, 229, 255, 0.7);
-      transition: all 0.3s ease;
-      box-shadow:
-        0 0 8px 2px rgba(0, 229, 255, 0.4),
-        0 0 15px 4px rgba(0, 229, 255, 0.2),
-        0 0 25px 6px rgba(0, 229, 255, 0.1);
-      animation: basePulse 4s ease-in-out infinite alternate;
+      pointer-events: none;
+      filter: blur(0.5px);
+      opacity: 0.6;
+      animation: float 8s infinite ease-in-out;
     }
 
-    .grid-dot:hover::before {
-      height: 12px;
-      width: 12px;
-      background: rgba(0, 229, 255, 1);
-      box-shadow:
-        0 0 20px 4px rgba(0, 229, 255, 0.8),
-        0 0 35px 8px rgba(0, 229, 255, 0.5),
-        0 0 50px 12px rgba(0, 229, 255, 0.3),
-        0 0 70px 16px rgba(0, 229, 255, 0.1);
-      transition: all 0.1s ease;
-      animation: none;
+    .particle.glow {
+      box-shadow: 0 0 20px currentColor, 0 0 40px currentColor;
+      animation: float 6s infinite ease-in-out, pulse 3s infinite ease-in-out;
     }
 
-    /* Enhanced ripple effect for nearby dots */
-    .grid-dot:hover ~ .grid-dot::before,
-    .grid-dot:hover + .grid-dot::before {
-      background: rgba(0, 229, 255, 0.8);
-      height: 6px;
-      width: 6px;
-      box-shadow:
-        0 0 12px 3px rgba(0, 229, 255, 0.5),
-        0 0 20px 5px rgba(0, 229, 255, 0.3);
-      animation: none;
+    .particle.trail {
+      animation: float 10s infinite linear, trail 2s infinite ease-in-out;
     }
 
-    /* Base pulsing animation */
-    @keyframes basePulse {
-      0% {
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
         opacity: 0.6;
-        transform: translate(-50%, -50%) scale(1);
+      }
+      25% {
+        transform: translateY(-20px) translateX(10px) rotate(90deg);
+        opacity: 0.8;
       }
       50% {
+        transform: translateY(-10px) translateX(-15px) rotate(180deg);
+        opacity: 0.4;
+      }
+      75% {
+        transform: translateY(-30px) translateX(5px) rotate(270deg);
         opacity: 0.9;
-        transform: translate(-50%, -50%) scale(1.1);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+      50% {
+        transform: scale(1.5);
+        opacity: 1;
+      }
+    }
+
+    @keyframes trail {
+      0% {
+        box-shadow: 0 0 0 0 currentColor;
+      }
+      50% {
+        box-shadow: 0 0 0 10px transparent;
       }
       100% {
-        opacity: 0.7;
-        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 0 20px transparent;
       }
     }
 
-    /* Random color variations */
-    .grid-dot:nth-child(3n)::before {
-      background: rgba(138, 43, 226, 0.7);
-      box-shadow:
-        0 0 8px 2px rgba(138, 43, 226, 0.4),
-        0 0 15px 4px rgba(138, 43, 226, 0.2),
-        0 0 25px 6px rgba(138, 43, 226, 0.1);
+    /* Neural Network Background */
+    .neural-network {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: 0.4;
+      pointer-events: none;
     }
 
-    .grid-dot:nth-child(5n)::before {
-      background: rgba(0, 191, 255, 0.7);
-      box-shadow:
-        0 0 8px 2px rgba(0, 191, 255, 0.4),
-        0 0 15px 4px rgba(0, 191, 255, 0.2),
-        0 0 25px 6px rgba(0, 191, 255, 0.1);
+    .neural-node {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #00e5ff;
+      box-shadow: 
+        0 0 10px #00e5ff,
+        0 0 20px #00e5ff;
+      animation: nodePulse 4s infinite ease-in-out;
     }
 
-    .grid-dot:nth-child(7n)::before {
-      background: rgba(255, 20, 147, 0.7);
-      box-shadow:
-        0 0 8px 2px rgba(255, 20, 147, 0.4),
-        0 0 15px 4px rgba(255, 20, 147, 0.2),
-        0 0 25px 6px rgba(255, 20, 147, 0.1);
+    .neural-node.secondary {
+      background: #8a2be2;
+      box-shadow: 
+        0 0 10px #8a2be2,
+        0 0 20px #8a2be2;
+      animation-duration: 3s;
+    }
+
+    .neural-node.tertiary {
+      background: #ff1493;
+      box-shadow: 
+        0 0 10px #ff1493,
+        0 0 20px #ff1493;
+      animation-duration: 5s;
+    }
+
+    @keyframes nodePulse {
+      0%, 100% {
+        opacity: 0.4;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.8);
+      }
+    }
+
+    .neural-connection {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #00e5ff, transparent);
+      transform-origin: left center;
+      animation: connectionFlow 6s infinite linear;
+      opacity: 0.5;
+    }
+
+    .neural-connection.secondary {
+      background: linear-gradient(90deg, transparent, #8a2be2, transparent);
+      animation-duration: 4s;
+    }
+
+    .neural-connection.tertiary {
+      background: linear-gradient(90deg, transparent, #ff1493, transparent);
+      animation-duration: 8s;
+    }
+
+    @keyframes connectionFlow {
+      0% {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      20% {
+        opacity: 0.6;
+        transform: scaleX(1);
+      }
+      80% {
+        opacity: 0.6;
+        transform: scaleX(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+    }
+
+    .data-pulse {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 8px #ffffff;
+      animation: dataPulseMove 3s infinite linear;
+    }
+
+    @keyframes dataPulseMove {
+      0% {
+        opacity: 0;
+        transform: translateX(0);
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(var(--connection-length));
+      }
     }
 
     /* Navbar */
@@ -222,7 +303,7 @@
       text-align: center;
       padding: 100px 20px 60px;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     .hero h1 {
@@ -259,7 +340,7 @@
       max-width: 1200px;
       text-align: center;
       position: relative;
-      z-index: 1;
+      z-index: 2;
       box-shadow: 0 0 20px rgba(255, 193, 7, 0.1);
     }
 
@@ -293,7 +374,7 @@
       max-width: 1600px;
       margin: 0 auto;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     /* Cards */
@@ -327,7 +408,7 @@
       border-radius: 20px;
       font-size: 0.75em;
       font-weight: 600;
-      z-index: 2;
+      z-index: 3;
       backdrop-filter: blur(10px);
     }
 
@@ -435,6 +516,139 @@
       box-shadow: none;
     }
 
+    /* harsha split effect */
+    .harsha-split-effect {
+        position: relative;
+        display: inline-block;
+    }
+
+    .harsha-split-effect h2 {
+        margin: 0; 
+        padding: 0;
+        position: relative;
+        font-size: 6em; 
+        color: transparent;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    .harsha-split-effect h2 span:nth-child(1) {
+        position: absolute;
+        top: 0; 
+        left: 0; 
+        color: #fff;
+        transition: 0.5s ease;
+        clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+        overflow: hidden;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .harsha-split-effect:hover h2 span:nth-child(1) {
+        transform: translateY(-18px); 
+    }
+
+    .harsha-split-effect h2 span:nth-child(2) {
+        position: absolute;
+        top: 0; 
+        left: 0; 
+        color: #fff;
+        transition: 0.5s ease;
+        clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+        overflow: hidden;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .harsha-split-effect:hover h2 span:nth-child(2) {
+        transform: translateY(18px); 
+    }
+
+    .harsha-split-effect h2 span:nth-child(3) {
+        position: absolute;
+        top: 50%; 
+        left: 0;
+        transform: translateY(-50%) scaleY(0);
+        width: 91%; 
+        color: #333;
+        background: linear-gradient(45deg, #ffd700, #ffed4e);
+        font-size: 0.25em; 
+        font-weight: 500;
+        letter-spacing: 0.7em;
+        text-align: center;
+        padding: 8px 10px; 
+        margin-left: 5px;
+        transition: 0.5s ease;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .harsha-split-effect:hover h2 span:nth-child(3) {
+        transform: translateY(-50%) scaleY(1);
+    }
+
+    .harsha-split-effect {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      padding: 20px;
+      z-index: 2;
+    }
+
+    /* Shimmer effect for subtitle */
+    .shimmer {
+      font-family: "Lato", sans-serif;
+      font-weight: 300;
+      font-size: 1.3em;
+      color: rgba(255, 255, 255, 0.1);
+      text-align: center;
+      display: inline-block;
+      background: linear-gradient(to right, #222 0%, #fff 50%, #222 100%);
+      background-size: 125px 100%;
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      background-color: #222;
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -moz-text-fill-color: transparent;
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: left top;
+      }
+      100% {
+        background-position: right top;
+      }
+    }
+
+    /* TextScramble styles */
+    .text-scramble-container {
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .text {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 300;
+      font-size: 1.2em;
+      color: #fff;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dud {
+      color: #757575;
+    }
+
     footer {
       text-align: center;
       padding: 40px 20px;
@@ -444,7 +658,7 @@
       font-size: 1em;
       margin-top: 40px;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     /* Responsive design */
@@ -556,26 +770,23 @@
         top: 10px;
         right: 10px;
       }
-      
-      .glowing-grid {
-        grid-template-columns: repeat(15, 1fr);
-        grid-template-rows: repeat(20, 1fr);
+
+      .shimmer {
+        font-size: 1.1em;
+      }
+
+      .text {
+        font-size: 1.1em;
+        max-width: 90%;
       }
       
-      /* Enhanced mobile dot visibility */
-      .grid-dot::before {
-        height: 5px;
-        width: 5px;
-        background: rgba(0, 229, 255, 0.8);
-        box-shadow:
-          0 0 10px 3px rgba(0, 229, 255, 0.5),
-          0 0 18px 5px rgba(0, 229, 255, 0.3),
-          0 0 28px 7px rgba(0, 229, 255, 0.15);
+      .text-scramble-container {
+        padding: 30px 15px;
       }
       
-      .grid-dot:hover::before {
-        height: 10px;
-        width: 10px;
+      .neural-node {
+        width: 3px;
+        height: 3px;
       }
     }
 
@@ -646,182 +857,22 @@
         font-size: 0.65em;
         padding: 3px 6px;
       }
-      
-      /* Further enhanced mobile dot visibility */
-      .grid-dot::before {
-        height: 6px;
-        width: 6px;
-        background: rgba(0, 229, 255, 0.9);
-        box-shadow:
-          0 0 12px 4px rgba(0, 229, 255, 0.6),
-          0 0 20px 6px rgba(0, 229, 255, 0.4),
-          0 0 30px 8px rgba(0, 229, 255, 0.2);
-      }
-    }
-         /* harsha split effect */
-        .harsha-split-effect {
-            position: relative;
-            display: inline-block;
-        }
 
-        .harsha-split-effect h2 {
-            margin: 0; 
-            padding: 0;
-            position: relative;
-            font-size: 6em; 
-            color: transparent;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-
-        .harsha-split-effect h2 span:nth-child(1) {
-            position: absolute;
-            top: 0; 
-            left: 0; 
-            color: #fff;
-            transition: 0.5s ease;
-            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
-            overflow: hidden;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .harsha-split-effect:hover h2 span:nth-child(1) {
-            transform: translateY(-18px); 
-        }
-
-        .harsha-split-effect h2 span:nth-child(2) {
-            position: absolute;
-            top: 0; 
-            left: 0; 
-            color: #fff;
-            transition: 0.5s ease;
-            clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
-            overflow: hidden;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .harsha-split-effect:hover h2 span:nth-child(2) {
-            transform: translateY(18px); 
-        }
-
-        .harsha-split-effect h2 span:nth-child(3) {
-            position: absolute;
-            top: 50%; 
-            left: 0;
-            transform: translateY(-50%) scaleY(0);
-            width: 91%; 
-            color: #333;
-            background: linear-gradient(45deg, #ffd700, #ffed4e);
-            font-size: 0.25em; 
-            font-weight: 500;
-            letter-spacing: 0.7em;
-            text-align: center;
-            padding: 8px 10px; 
-            margin-left: 5px;
-            transition: 0.5s ease;
-            border-radius: 4px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-
-        .harsha-split-effect:hover h2 span:nth-child(3) {
-            transform: translateY(-50%) scaleY(1);
-        }
-
-        .harsha-split-effect {
-          display: flex;
-          justify-content: center;
-          position: relative;
-          padding: 20px;
-        }
-
-    /* Shimmer effect for subtitle */
-    .shimmer {
-      font-family: "Lato", sans-serif;
-      font-weight: 300;
-      font-size: 1.3em;
-      color: rgba(255, 255, 255, 0.1);
-      text-align: center;
-      display: inline-block;
-      background: linear-gradient(to right, #222 0%, #fff 50%, #222 100%);
-      background-size: 125px 100%;
-      background-repeat: no-repeat;
-      background-position: 0 0;
-      background-color: #222;
-      -webkit-background-clip: text;
-      -moz-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      -moz-text-fill-color: transparent;
-      animation: shimmer 2s infinite;
-    }
-
-    @keyframes shimmer {
-      0% {
-        background-position: left top;
-      }
-      100% {
-        background-position: right top;
-      }
-    }
-
-    /* Responsive adjustments for shimmer text */
-    @media (max-width: 768px) {
-      .shimmer {
-        font-size: 1.1em;
-      }
-    }
-
-    @media (max-width: 480px) {
       .shimmer {
         font-size: 1em;
       }
-    }
 
-    /* TextScramble styles */
-    .text-scramble-container {
-      text-align: center;
-      padding: 40px 20px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .text {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      font-weight: 300;
-      font-size: 1.2em;
-      color: #fff;
-      line-height: 1.6;
-      max-width: 600px;
-      margin: 0 auto;
-      min-height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .dud {
-      color: #757575;
-    }
-
-    /* Responsive adjustments for text scramble */
-    @media (max-width: 768px) {
-      .text {
-        font-size: 1.1em;
-        max-width: 90%;
-      }
-      
-      .text-scramble-container {
-        padding: 30px 15px;
-      }
-    }
-
-    @media (max-width: 480px) {
       .text {
         font-size: 1em;
       }
       
       .text-scramble-container {
         padding: 25px 10px;
+      }
+      
+      .neural-node {
+        width: 2px;
+        height: 2px;
       }
     }
   </style>
@@ -831,8 +882,11 @@
   <link rel="icon" href="favicon.ico">
 </head>
 <body>
-  <!-- Glowing dots grid background -->
-  <div class="glowing-grid" id="glow-grid"></div>
+  <!-- Particle System Container -->
+  <div class="particle-container" id="particleContainer"></div>
+
+  <!-- Neural Network Container -->
+  <div class="neural-network" id="neuralNetwork"></div>
 
   <nav class="navbar">
     <div class="logo">🚀 My Apps</div>
@@ -951,7 +1005,7 @@
   </div>
 
   <!-- LikeBtn.com BEGIN -->
-  <div style="text-align: center; padding: 20px 0; position: relative; z-index: 1;">
+  <div style="text-align: center; padding: 20px 0; position: relative; z-index: 3;">
     <span class="likebtn-wrapper" data-i18n_like="ShowLove" data-ef_voting="bounce" data-white_label="true" data-rich_snippet="true" data-identifier="love"></span>
   </div>
   <script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
@@ -962,147 +1016,249 @@
   </footer>
 
   <script>
-    // Generate the glowing grid dots
-    function createGlowGrid() {
-      const grid = document.getElementById('glow-grid');
-      const cols = window.innerWidth > 768 ? 20 : 15;
-      const rows = window.innerWidth > 768 ? 15 : 20;
-      
-      // Clear existing dots
-      grid.innerHTML = '';
-      
-      // Update CSS grid
-      grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-      grid.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
-      
-      // Create dots
-      for (let i = 0; i < cols * rows; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'grid-dot';
-        grid.appendChild(dot);
+    // Particle System Class
+    class ParticleSystem {
+      constructor() {
+        this.container = document.getElementById('particleContainer');
+        this.particles = [];
+        this.colors = [
+          '#00e5ff', '#8a2be2', '#ff1493', '#00bfff', 
+          '#ffd700', '#ff6347', '#00ff7f', '#da70d6'
+        ];
+        this.init();
+      }
+
+      init() {
+        this.createParticles(80);
+        this.animate();
+      }
+
+      createParticles(count) {
+        for (let i = 0; i < count; i++) {
+          this.createParticle();
+        }
+      }
+
+      createParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const size = Math.random() * 4 + 1;
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+        const color = this.colors[Math.floor(Math.random() * this.colors.length)];
+        const speed = Math.random() * 1.5 + 0.5;
+        const direction = Math.random() * 360;
+        
+        const particleTypes = ['', 'glow', 'trail'];
+        const type = particleTypes[Math.floor(Math.random() * particleTypes.length)];
+        if (type) particle.classList.add(type);
+        
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.background = color;
+        particle.style.color = color;
+        particle.style.animationDelay = Math.random() * 8 + 's';
+        particle.style.animationDuration = (6 + Math.random() * 4) + 's';
+        
+        this.container.appendChild(particle);
+        
+        const particleData = {
+          element: particle,
+          x: x,
+          y: y,
+          vx: Math.cos(direction * Math.PI / 180) * speed,
+          vy: Math.sin(direction * Math.PI / 180) * speed,
+          size: size,
+          color: color,
+          life: 1,
+          maxLife: Math.random() * 5 + 5
+        };
+        
+        this.particles.push(particleData);
+      }
+
+      animate() {
+        this.particles.forEach((particle) => {
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          
+          if (particle.x <= 0 || particle.x >= window.innerWidth - particle.size) {
+            particle.vx *= -0.8;
+            particle.x = Math.max(0, Math.min(window.innerWidth - particle.size, particle.x));
+          }
+          if (particle.y <= 0 || particle.y >= window.innerHeight - particle.size) {
+            particle.vy *= -0.8;
+            particle.y = Math.max(0, Math.min(window.innerHeight - particle.size, particle.y));
+          }
+          
+          particle.vy += 0.01;
+          particle.vx *= 0.999;
+          particle.vy *= 0.999;
+          
+          particle.element.style.left = particle.x + 'px';
+          particle.element.style.top = particle.y + 'px';
+          
+          particle.life -= 0.003;
+          if (particle.life <= 0) {
+            particle.x = Math.random() * window.innerWidth;
+            particle.y = Math.random() * window.innerHeight;
+            particle.vx = (Math.random() - 0.5) * 3;
+            particle.vy = (Math.random() - 0.5) * 3;
+            particle.life = 1;
+            particle.color = this.colors[Math.floor(Math.random() * this.colors.length)];
+            particle.element.style.background = particle.color;
+            particle.element.style.color = particle.color;
+          }
+        });
+        
+        requestAnimationFrame(() => this.animate());
       }
     }
 
-    // Initialize grid on load
-    createGlowGrid();
+    // Neural Network Class
+    class NeuralNetwork {
+      constructor() {
+        this.container = document.getElementById('neuralNetwork');
+        this.nodes = [];
+        this.connections = [];
+        this.nodeCount = 40;
+        this.connectionProbability = 0.12;
+        this.init();
+      }
 
-    // Recreate grid on resize
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(createGlowGrid, 250);
-    });
+      init() {
+        this.createNodes();
+        this.createConnections();
+        this.startDataPulses();
+      }
 
-    // Enhanced random twinkling effect
-    function addTwinkle() {
-      const dots = document.querySelectorAll('.grid-dot');
-      const randomDots = Array.from(dots).sort(() => 0.5 - Math.random()).slice(0, 15);
-      
-      randomDots.forEach((dot, index) => {
-        // Add staggered delay for wave effect
-        setTimeout(() => {
-          const colors = [
-            'rgba(0, 229, 255, 1)',
-            'rgba(138, 43, 226, 1)',
-            'rgba(255, 20, 147, 1)',
-            'rgba(0, 191, 255, 1)',
-            'rgba(255, 215, 0, 1)'
-          ];
-          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      createNodes() {
+        for (let i = 0; i < this.nodeCount; i++) {
+          const node = document.createElement('div');
+          node.className = 'neural-node';
           
-          dot.style.setProperty('--twinkle-color', randomColor);
-          dot.classList.add('twinkling');
+          const nodeTypes = ['', 'secondary', 'tertiary'];
+          const type = nodeTypes[Math.floor(Math.random() * nodeTypes.length)];
+          if (type) node.classList.add(type);
           
-          setTimeout(() => {
-            dot.classList.remove('twinkling');
-          }, 2500);
-        }, index * 100);
-      });
-    }
+          const x = Math.random() * (window.innerWidth - 20) + 10;
+          const y = Math.random() * (window.innerHeight - 20) + 10;
+          
+          node.style.left = x + 'px';
+          node.style.top = y + 'px';
+          node.style.animationDelay = Math.random() * 4 + 's';
+          
+          this.container.appendChild(node);
+          
+          this.nodes.push({
+            element: node,
+            x: x,
+            y: y,
+            connections: []
+          });
+        }
+      }
 
-    // Add continuous ambient glow effect
-    function addAmbientGlow() {
-      const dots = document.querySelectorAll('.grid-dot');
-      const randomDots = Array.from(dots).sort(() => 0.5 - Math.random()).slice(0, 8);
-      
-      randomDots.forEach(dot => {
-        dot.classList.add('ambient-glow');
+      createConnections() {
+        for (let i = 0; i < this.nodes.length; i++) {
+          for (let j = i + 1; j < this.nodes.length; j++) {
+            const nodeA = this.nodes[i];
+            const nodeB = this.nodes[j];
+            const distance = Math.sqrt(
+              Math.pow(nodeA.x - nodeB.x, 2) + Math.pow(nodeA.y - nodeB.y, 2)
+            );
+            
+            if (distance < 180 && Math.random() < this.connectionProbability) {
+              this.createConnection(nodeA, nodeB, distance);
+            }
+          }
+        }
+      }
+
+      createConnection(nodeA, nodeB, distance) {
+        const connection = document.createElement('div');
+        connection.className = 'neural-connection';
+        
+        const connectionTypes = ['', 'secondary', 'tertiary'];
+        const type = connectionTypes[Math.floor(Math.random() * connectionTypes.length)];
+        if (type) connection.classList.add(type);
+        
+        const angle = Math.atan2(nodeB.y - nodeA.y, nodeB.x - nodeA.x);
+        
+        connection.style.left = nodeA.x + 'px';
+        connection.style.top = nodeA.y + 'px';
+        connection.style.width = distance + 'px';
+        connection.style.transform = `rotate(${angle}rad)`;
+        connection.style.animationDelay = Math.random() * 6 + 's';
+        
+        this.container.appendChild(connection);
+        
+        nodeA.connections.push({ element: connection, target: nodeB, distance });
+        this.connections.push({ element: connection, nodeA, nodeB, distance });
+      }
+
+      startDataPulses() {
+        setInterval(() => {
+          if (this.connections.length > 0) {
+            const randomConnection = this.connections[Math.floor(Math.random() * this.connections.length)];
+            this.createDataPulse(randomConnection);
+          }
+        }, 800);
+      }
+
+      createDataPulse(connection) {
+        const pulse = document.createElement('div');
+        pulse.className = 'data-pulse';
+        pulse.style.left = connection.nodeA.x + 'px';
+        pulse.style.top = connection.nodeA.y + 'px';
+        pulse.style.setProperty('--connection-length', connection.distance + 'px');
+        
+        const angle = Math.atan2(
+          connection.nodeB.y - connection.nodeA.y,
+          connection.nodeB.x - connection.nodeA.x
+        );
+        pulse.style.transform = `rotate(${angle}rad)`;
+        
+        this.container.appendChild(pulse);
         
         setTimeout(() => {
-          dot.classList.remove('ambient-glow');
-        }, 4000);
-      });
+          if (pulse.parentNode) {
+            pulse.parentNode.removeChild(pulse);
+          }
+        }, 3000);
+      }
     }
 
-    // Add CSS for enhanced twinkling and ambient effects
-    const style = document.createElement('style');
-    style.textContent = `
-      .grid-dot.twinkling::before {
-        background: var(--twinkle-color, rgba(0, 229, 255, 1)) !important;
-        height: 10px !important;
-        width: 10px !important;
-        box-shadow:
-          0 0 20px 4px var(--twinkle-color, rgba(0, 229, 255, 0.8)) !important,
-          0 0 35px 8px var(--twinkle-color, rgba(0, 229, 255, 0.5)) !important,
-          0 0 50px 12px var(--twinkle-color, rgba(0, 229, 255, 0.3)) !important;
-        animation: enhancedTwinkle 2.5s ease-in-out !important;
-      }
-      
-      .grid-dot.ambient-glow::before {
-        background: rgba(0, 229, 255, 0.9) !important;
-        height: 6px !important;
-        width: 6px !important;
-        box-shadow:
-          0 0 15px 3px rgba(0, 229, 255, 0.6) !important,
-          0 0 25px 5px rgba(0, 229, 255, 0.4) !important;
-        animation: ambientPulse 4s ease-in-out !important;
-      }
-      
-      @keyframes enhancedTwinkle {
-        0% {
-          opacity: 0.3;
-          transform: translate(-50%, -50%) scale(0.8) rotate(0deg);
-        }
-        25% {
-          opacity: 0.8;
-          transform: translate(-50%, -50%) scale(1.3) rotate(90deg);
-        }
-        50% {
-          opacity: 1;
-          transform: translate(-50%, -50%) scale(1.8) rotate(180deg);
-        }
-        75% {
-          opacity: 0.9;
-          transform: translate(-50%, -50%) scale(1.4) rotate(270deg);
-        }
-        100% {
-          opacity: 0.4;
-          transform: translate(-50%, -50%) scale(1) rotate(360deg);
-        }
-      }
-      
-      @keyframes ambientPulse {
-        0%, 100% {
-          opacity: 0.5;
-          transform: translate(-50%, -50%) scale(1);
-        }
-        50% {
-          opacity: 0.9;
-          transform: translate(-50%, -50%) scale(1.2);
-        }
-      }
-    `;
-    document.head.appendChild(style);
+    // Mouse interaction effects
+    let mouseX = 0;
+    let mouseY = 0;
 
-    // Start enhanced twinkling effect (more frequent)
-    setInterval(addTwinkle, 1500);
-    
-    // Start ambient glow effect
-    setInterval(addAmbientGlow, 2500);
-    
-    // Initial effects
-    setTimeout(addTwinkle, 500);
-    setTimeout(addAmbientGlow, 1200);
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      if (particleSystem && particleSystem.particles) {
+        particleSystem.particles.forEach(particle => {
+          const distance = Math.sqrt(
+            Math.pow(particle.x - mouseX, 2) + Math.pow(particle.y - mouseY, 2)
+          );
+          
+          if (distance < 80) {
+            const force = (80 - distance) / 2000;
+            const angle = Math.atan2(mouseY - particle.y, mouseX - particle.x);
+            particle.vx += Math.cos(angle) * force;
+            particle.vy += Math.sin(angle) * force;
+          }
+        });
+      }
+    });
+
+    // Initialize systems
+    const particleSystem = new ParticleSystem();
+    const neuralNetwork = new NeuralNetwork();
 
     // Mobile menu functionality
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
@@ -1113,7 +1269,6 @@
       mobileMenu.classList.toggle('active');
     });
 
-    // Close mobile menu when clicking on a link
     const menuLinks = mobileMenu.querySelectorAll('a');
     menuLinks.forEach(link => {
       link.addEventListener('click', () => {
@@ -1122,7 +1277,6 @@
       });
     });
 
-    // Close mobile menu when clicking outside
     document.addEventListener('click', function(event) {
       if (!mobileMenuToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
         mobileMenuToggle.classList.remove('active');
@@ -1144,27 +1298,7 @@
       });
     });
 
-    // Optimize performance for mobile
-    let ticking = false;
-    function updateOnScroll() {
-      // Reduce animation frequency on mobile for better performance
-      if (window.innerWidth <= 768) {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }
-    }
-
-    window.addEventListener('scroll', updateOnScroll, { passive: true });
-
-
-    // ——————————————————————————————————————————————————
     // TextScramble
-    // ——————————————————————————————————————————————————
-
     class TextScramble {
       constructor(el) {
         this.el = el
@@ -1219,10 +1353,6 @@
       }
     }
 
-    // ——————————————————————————————————————————————————
-    // Example
-    // ——————————————————————————————————————————————————
-
     const phrases = [
       'I enjoy exploring new technologies,',
       'solving complex problems,',
@@ -1245,6 +1375,29 @@
     }
 
     next()
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      setTimeout(() => {
+        document.getElementById('neuralNetwork').innerHTML = '';
+        new NeuralNetwork();
+      }, 100);
+    });
+
+    // Performance optimization
+    let ticking = false;
+    function updateOnScroll() {
+      if (window.innerWidth <= 768) {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+    }
+
+    window.addEventListener('scroll', updateOnScroll, { passive: true });
   </script>
 </body>
 </html>
