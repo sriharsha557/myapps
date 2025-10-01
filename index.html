@@ -346,6 +346,17 @@
       width: 400px;
       height: 400px;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #character-container img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(255, 255, 255, 0.2);
     }
 
     .harsha-split-effect {
@@ -637,7 +648,9 @@
   </div>
 
   <div class="character-harsha-section">
-    <div id="character-container"></div>
+    <div id="character-container">
+      <img src="assets/harsha.gif" alt="Harsha">
+    </div>
     <div class="harsha-split-effect">
       <h2>
         HARSHA
@@ -789,79 +802,7 @@ const stars = Array.from({ length: 200 }, () => new Star());
       canvas.height = window.innerHeight;
     });
 
-    // 3D Character
-    const container = document.getElementById('character-container');
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     
-    renderer.setSize(400, 400);
-    renderer.setClearColor(0x000000, 0);
-    container.appendChild(renderer.domElement);
-
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-    scene.add(ambientLight);
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
-    directionalLight.position.set(5, 5, 5);
-    scene.add(directionalLight);
-
-    let model;
-    const loader = new THREE.GLTFLoader();
-    
-    loader.load('assets/harsha.glb',
-      (gltf) => {
-        model = gltf.scene;
-        scene.add(model);
-        
-        const box = new THREE.Box3().setFromObject(model);
-        const center = box.getCenter(new THREE.Vector3());
-        const size = box.getSize(new THREE.Vector3());
-        const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 2 / maxDim;
-        model.scale.multiplyScalar(scale);
-        
-        model.position.sub(center.multiplyScalar(scale));
-      },
-      undefined,
-      (error) => {
-        console.error('Error loading model:', error);
-      }
-    );
-
-    camera.position.z = 3;
-
-    let targetRotationY = 0;
-    let targetRotationX = 0;
-    let normalizedMouseX = 0;
-    let normalizedMouseY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      normalizedMouseX = (e.clientX / window.innerWidth) * 2 - 1;
-      normalizedMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-      
-      targetRotationY = normalizedMouseX * 0.5;
-      targetRotationX = normalizedMouseY * 0.3;
-    });
-
-    function animate3D() {
-      requestAnimationFrame(animate3D);
-      
-      if (model) {
-        model.rotation.y += (targetRotationY - model.rotation.y) * 0.05;
-        model.rotation.x += (targetRotationX - model.rotation.x) * 0.05;
-        model.rotation.y += 0.005;
-      }
-      
-      renderer.render(scene, camera);
-    }
-    animate3D();
-
-    window.addEventListener('resize', () => {
-      const size = Math.min(400, window.innerWidth - 40);
-      renderer.setSize(size, size);
-      camera.aspect = 1;
-      camera.updateProjectionMatrix();
-    });
 
     // Navbar scroll
     const navbar = document.getElementById('navbar');
