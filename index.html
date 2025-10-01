@@ -50,6 +50,7 @@
       border-radius: 50%;
     }
 
+    
     #starfield {
       position: fixed;
       top: 0;
@@ -60,6 +61,38 @@
       pointer-events: none;
     }
 
+    .moon {
+      position: fixed;
+      top: 10%;
+      right: 8%;
+      width: 150px;
+      height: 150px;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.9;
+      filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+      animation: moonGlow 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes moonGlow {
+      from { 
+        filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+        transform: translateY(0px);
+      }
+      to { 
+        filter: drop-shadow(0 0 50px rgba(255, 255, 255, 0.5));
+        transform: translateY(-10px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .moon {
+        width: 100px;
+        height: 100px;
+        top: 8%;
+        right: 5%;
+      }
+}
     .navbar {
       background: rgba(10, 22, 40, 0.8);
       backdrop-filter: blur(25px);
@@ -537,6 +570,7 @@
 </head>
 <body>
   <canvas id="starfield"></canvas>
+  <img src="assets/moon.png" alt="Moon" class="moon">
   <div class="cursor" id="cursor"></div>
   <div class="cursor-follower" id="cursor-follower"></div>
 
