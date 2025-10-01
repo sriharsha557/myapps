@@ -663,7 +663,6 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-    // Cursor
     const cursor = document.getElementById('cursor');
     const cursorFollower = document.getElementById('cursor-follower');
     let mouseX = 0, mouseY = 0, followerX = 0, followerY = 0;
@@ -684,7 +683,6 @@
     }
     updateFollower();
 
-    // Starfield with Shooting Stars
     const canvas = document.getElementById('starfield');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -699,7 +697,6 @@
         this.opacity = Math.random();
         this.twinkleSpeed = Math.random() * 0.02 + 0.01;
       }
-
       update() {
         this.opacity += this.twinkleSpeed;
         if (this.opacity > 1 || this.opacity < 0) this.twinkleSpeed *= -1;
@@ -709,7 +706,6 @@
           this.x = Math.random() * canvas.width;
         }
       }
-
       draw() {
         ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
         ctx.beginPath();
@@ -722,7 +718,6 @@
       constructor() {
         this.reset();
       }
-
       reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height * 0.5;
@@ -731,21 +726,17 @@
         this.opacity = 1;
         this.angle = Math.PI / 4;
       }
-
       update() {
         this.x += Math.cos(this.angle) * this.speed;
         this.y += Math.sin(this.angle) * this.speed;
         this.opacity -= 0.015;
-        
         if (this.opacity <= 0 || this.x > canvas.width || this.y > canvas.height) {
           this.reset();
           this.opacity = 0;
         }
       }
-
       draw() {
         if (this.opacity <= 0) return;
-        
         const gradient = ctx.createLinearGradient(
           this.x, this.y,
           this.x - Math.cos(this.angle) * this.length,
@@ -753,7 +744,6 @@
         );
         gradient.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`);
         gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-        
         ctx.strokeStyle = gradient;
         ctx.lineWidth = 2;
         ctx.beginPath();
@@ -765,8 +755,7 @@
         ctx.stroke();
       }
     }
-
-    const stars = Array.from({ length: 200 }, () => new Star());
+const stars = Array.from({ length: 200 }, () => new Star());
     const shootingStars = [];
     let lastShootingStarTime = 0;
 
@@ -1033,3 +1022,53 @@
   </script>
 </body>
 </html>
+    const stars = Array.from({ length: 200 }, () => new Star());
+    const shootingStars = [];
+    let lastShootingStarTime = 0;
+
+    function animateStarfield() {
+      ctx.fillStyle = 'rgba(10, 22, 40, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(star => {
+        star.update();
+        star.draw();
+      });
+      const currentTime = Date.now();
+      if (currentTime - lastShootingStarTime > Math.random() * 5000 + 5000) {
+        shootingStars.push(new ShootingStar());
+        lastShootingStarTime = currentTime;
+      }
+      shootingStars.forEach((star, index) => {
+        star.update();
+        star.draw();
+        if (star.opacity <= 0) shootingStars.splice(index, 1);
+      });
+      requestAnimationFrame(animateStarfield);
+    }
+    animateStarfield();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    const container = document.getElementById('character-container');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(400, 400);
+    renderer.setClearColor(0x000000, 0);
+    container.appendChild(renderer.domElement);
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    scene.add(ambientLight);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    directionalLight.position.set(5, 5, 5);
+    scene.add(directionalLight);
+
+    let model;
+    const loader = new THREE.GLTFLoader();
+    loader.load('assets/harsha.glb',
+      (gltf) => {
+        model = gltf.scene;
+        scene
