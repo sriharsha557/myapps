@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My AppStack</title>
+  <title>Harsha's Creative Showcase</title>
   <style>
     * {
       margin: 0;
@@ -18,275 +18,50 @@
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #000;
+      background: #0a1628;
       min-height: 100vh;
       color: #fff;
       position: relative;
       cursor: none;
     }
 
-    /* Custom Cursor */
     .cursor {
       position: fixed;
       width: 20px;
       height: 20px;
-      border: 2px solid #00ff88;
+      border: 2px solid rgba(255, 255, 255, 0.8);
       pointer-events: none;
       z-index: 9999;
       mix-blend-mode: difference;
       transition: all 0.1s ease;
-      backdrop-filter: blur(2px);
       transform: rotate(45deg);
+      border-radius: 3px;
     }
 
     .cursor-follower {
       position: fixed;
       width: 8px;
       height: 8px;
-      background: #fff;
+      background: rgba(255, 255, 255, 0.6);
       pointer-events: none;
       z-index: 9998;
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 0 20px #fff;
-      transform: rotate(45deg);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
     }
 
-    /* Particle System Background */
-    .particle-container {
+    #starfield {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
       z-index: 0;
-      overflow: hidden;
-    }
-
-    .particle {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      filter: blur(0.5px);
-      opacity: 0.6;
-      animation: float 8s infinite ease-in-out;
-    }
-
-    .particle.glow {
-      box-shadow: 0 0 20px currentColor, 0 0 40px currentColor;
-      animation: float 6s infinite ease-in-out, pulse 3s infinite ease-in-out;
-    }
-
-    .particle.trail {
-      animation: float 10s infinite linear, trail 2s infinite ease-in-out;
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0px) translateX(0px) rotate(0deg);
-        opacity: 0.6;
-      }
-      25% {
-        transform: translateY(-20px) translateX(10px) rotate(90deg);
-        opacity: 0.8;
-      }
-      50% {
-        transform: translateY(-10px) translateX(-15px) rotate(180deg);
-        opacity: 0.4;
-      }
-      75% {
-        transform: translateY(-30px) translateX(5px) rotate(270deg);
-        opacity: 0.9;
-      }
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 0.6;
-      }
-      50% {
-        transform: scale(1.5);
-        opacity: 1;
-      }
-    }
-
-    @keyframes trail {
-      0% {
-        box-shadow: 0 0 0 0 currentColor;
-      }
-      50% {
-        box-shadow: 0 0 0 10px transparent;
-      }
-      100% {
-        box-shadow: 0 0 0 20px transparent;
-      }
-    }
-
-    /* Neural Network Background */
-    .neural-network {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      opacity: 0.3;
       pointer-events: none;
     }
 
-    .neural-node {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: #00ff88;
-      border-radius: 50%;
-      animation: nodePulse 3s infinite ease-in-out;
-      box-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88;
-    }
-
-    .neural-node.secondary {
-      background: #0066ff;
-      box-shadow: 0 0 10px #0066ff, 0 0 20px #0066ff;
-      animation-duration: 4s;
-    }
-
-    .neural-node.tertiary {
-      background: #ff0088;
-      box-shadow: 0 0 10px #ff0088, 0 0 20px #ff0088;
-      animation-duration: 5s;
-    }
-
-    @keyframes nodePulse {
-      0%, 100% {
-        opacity: 0.3;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.5);
-      }
-    }
-
-    .neural-connection {
-      position: absolute;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #00ff88, transparent);
-      animation: connectionFlow 4s infinite linear;
-      transform-origin: left center;
-      opacity: 0.5;
-    }
-
-    .neural-connection.secondary {
-      background: linear-gradient(90deg, transparent, #0066ff, transparent);
-      animation-duration: 5s;
-    }
-
-    .neural-connection.tertiary {
-      background: linear-gradient(90deg, transparent, #ff0088, transparent);
-      animation-duration: 6s;
-    }
-
-    @keyframes connectionFlow {
-      0% {
-        opacity: 0;
-        transform: scaleX(0);
-      }
-      20% {
-        opacity: 1;
-        transform: scaleX(1);
-      }
-      80% {
-        opacity: 1;
-        transform: scaleX(1);
-      }
-      100% {
-        opacity: 0;
-        transform: scaleX(0);
-      }
-    }
-
-    /* Floating Elements */
-    .floating-elements {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .floating-shape {
-      position: absolute;
-      opacity: 0.1;
-      animation: floatShape 6s ease-in-out infinite;
-    }
-
-    .floating-shape:nth-child(1) {
-      top: 10%;
-      left: 10%;
-      width: 60px;
-      height: 60px;
-      background: #00ff88;
-      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-      animation-delay: 0s;
-    }
-
-    .floating-shape:nth-child(2) {
-      top: 20%;
-      right: 15%;
-      width: 40px;
-      height: 40px;
-      background: #0066ff;
-      border-radius: 50%;
-      animation-delay: 1s;
-    }
-
-    .floating-shape:nth-child(3) {
-      bottom: 20%;
-      left: 20%;
-      width: 80px;
-      height: 80px;
-      background: #ff0088;
-      clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
-      animation-delay: 2s;
-    }
-
-    .floating-shape:nth-child(4) {
-      top: 60%;
-      right: 30%;
-      width: 50px;
-      height: 50px;
-      background: #8800ff;
-      transform: rotate(45deg);
-      animation-delay: 3s;
-    }
-
-    .floating-shape:nth-child(5) {
-      bottom: 30%;
-      right: 10%;
-      width: 35px;
-      height: 35px;
-      background: #ffaa00;
-      border-radius: 50% 0;
-      animation-delay: 4s;
-    }
-
-    @keyframes floatShape {
-      0%, 100% { 
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.1;
-      }
-      50% { 
-        transform: translateY(-20px) rotate(180deg);
-        opacity: 0.3;
-      }
-    }
-
-    /* Holographic Navbar */
     .navbar {
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 255, 136, 0.05), rgba(0, 102, 255, 0.05));
+      background: rgba(10, 22, 40, 0.8);
       backdrop-filter: blur(25px);
       color: #fff;
       padding: 20px 40px;
@@ -297,55 +72,25 @@
       top: 0;
       z-index: 1000;
       transition: all 0.3s ease;
-      overflow: hidden;
-    }
-
-    .navbar::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-      transform: translateX(-100%) rotate(45deg);
-      animation: hologram 6s ease-in-out infinite;
-    }
-
-    @keyframes hologram {
-      0% { transform: translateX(-100%) rotate(45deg); }
-      50% { transform: translateX(100vw) rotate(45deg); }
-      100% { transform: translateX(-100%) rotate(45deg); }
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .navbar.scrolled {
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(0, 255, 136, 0.08), rgba(0, 102, 255, 0.08));
+      background: rgba(10, 22, 40, 0.95);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
     }
 
     .navbar .logo {
       font-size: 1.6em;
       font-weight: 700;
-      background: linear-gradient(45deg, #00ff88, #0066ff, #ff0088, #8800ff);
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: holographicText 4s ease-in-out infinite;
-      position: relative;
-      z-index: 2;
-    }
-
-    @keyframes holographicText {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      color: #fff;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     }
 
     .navbar ul {
       list-style: none;
       display: flex;
       gap: 25px;
-      position: relative;
-      z-index: 2;
     }
 
     .navbar ul li a {
@@ -355,21 +100,18 @@
       font-weight: 500;
       padding: 10px 18px;
       border-radius: 12px;
-      position: relative;
-      backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       transition: all 0.4s ease;
     }
 
     .navbar ul li a:hover {
       color: #fff;
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(0, 255, 136, 0.5);
-      box-shadow: 0 0 25px rgba(0, 255, 136, 0.3);
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
       transform: translateY(-2px);
     }
 
-    /* Mobile menu toggle */
     .mobile-menu-toggle {
       display: none;
       background: none;
@@ -378,13 +120,6 @@
       font-size: 1.5em;
       cursor: pointer;
       padding: 10px;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-    }
-
-    .mobile-menu-toggle:hover {
-      color: #00e5ff;
-      background: rgba(0, 229, 255, 0.1);
     }
 
     .mobile-menu-toggle span {
@@ -397,19 +132,6 @@
       border-radius: 2px;
     }
 
-    .mobile-menu-toggle.active span:nth-child(1) {
-      transform: rotate(-45deg) translate(-5px, 6px);
-    }
-
-    .mobile-menu-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(3) {
-      transform: rotate(45deg) translate(-5px, -6px);
-    }
-
-    /* Hero */
     .hero {
       text-align: center;
       padding: 100px 20px 60px;
@@ -420,33 +142,28 @@
     .hero h1 {
       font-size: 4em;
       margin-bottom: 20px;
-      background: linear-gradient(90deg, #fff, #00ff88, #0066ff);
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #fff;
       font-weight: 800;
-      animation: titleGlow 3s ease-in-out infinite alternate, gradientShift 4s ease-in-out infinite;
-      filter: drop-shadow(0 0 30px rgba(0, 255, 136, 0.7));
+      text-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+      animation: titleGlow 3s ease-in-out infinite alternate;
     }
 
     @keyframes titleGlow {
-      from { text-shadow: 0 0 20px rgba(0, 229, 255, 0.5); }
-      to { text-shadow: 0 0 30px rgba(0, 229, 255, 0.9); }
+      from { text-shadow: 0 0 30px rgba(255, 255, 255, 0.4); }
+      to { text-shadow: 0 0 50px rgba(255, 255, 255, 0.7); }
     }
 
     .hero p {
       font-size: 1.3em;
-      color: #aaa;
+      color: rgba(255, 255, 255, 0.7);
       font-weight: 300;
       margin-bottom: 40px;
     }
 
-    /* App Status Notice */
     .app-notice {
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(15px);
-      border: 2px solid #ffaa00;
+      background: rgba(10, 22, 40, 0.6);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(255, 255, 255, 0.2);
       border-radius: 20px;
       padding: 30px;
       margin: 50px auto;
@@ -454,62 +171,53 @@
       text-align: center;
       position: relative;
       z-index: 2;
-      box-shadow: 
-        0 0 30px rgba(255, 170, 0, 0.3),
-        inset 0 0 30px rgba(255, 170, 0, 0.1);
-      animation: noticeGlow 3s ease-in-out infinite alternate;
-    }
-
-    @keyframes noticeGlow {
-      from { box-shadow: 0 0 30px rgba(255, 170, 0, 0.3), inset 0 0 30px rgba(255, 170, 0, 0.1); }
-      to { box-shadow: 0 0 50px rgba(255, 170, 0, 0.5), inset 0 0 50px rgba(255, 170, 0, 0.2); }
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
     }
 
     .app-notice-icon {
       font-size: 2em;
       margin-bottom: 15px;
-      color: #ffaa00;
-      text-shadow: 0 0 10px rgba(255, 170, 0, 0.8);
+      color: #fff;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
     }
 
     .app-notice h3 {
-      color: #ffaa00;
+      color: #fff;
       font-size: 1.4em;
       margin-bottom: 15px;
       font-weight: 600;
     }
 
     .app-notice p {
-      color: #ddd;
+      color: rgba(255, 255, 255, 0.8);
       font-size: 1.1em;
       line-height: 1.6;
       margin-bottom: 10px;
     }
 
-    /* Container */
     .container {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 25px;
-      padding: 40px 30px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      padding: 60px 40px;
       max-width: 1600px;
       margin: 0 auto;
       position: relative;
       z-index: 2;
     }
 
-    /* Cards */
     .card {
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 25px;
-      padding: 30px;
+      padding: 35px;
       text-align: center;
       position: relative;
       overflow: hidden;
       transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       transform-style: preserve-3d;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
 
     .card::before {
@@ -519,24 +227,25 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
     }
 
     .card:hover {
-      transform: translateY(-20px) rotateX(10deg) rotateY(5deg);
-      border-color: #00ff88;
+      transform: translateY(-15px) scale(1.02);
+      border-color: rgba(255, 255, 255, 0.4);
       box-shadow: 
-        0 20px 60px rgba(0, 255, 136, 0.3),
-        0 0 50px rgba(0, 255, 136, 0.2);
+        0 20px 60px rgba(255, 255, 255, 0.15),
+        0 0 50px rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
     }
 
     .card:hover::before {
       opacity: 1;
     }
 
-    /* Status Tags */
     .status-tag {
       position: absolute;
       top: 20px;
@@ -547,30 +256,9 @@
       font-weight: 600;
       backdrop-filter: blur(10px);
       z-index: 3;
-    }
-
-    .status-wip {
-      background: rgba(255, 152, 0, 0.2);
-      color: #ff9800;
-      border: 1px solid #ff9800;
-      animation: wipPulse 2s ease-in-out infinite;
-    }
-
-    .status-auth {
-      background: rgba(156, 39, 176, 0.2);
-      color: #9c27b0;
-      border: 1px solid #9c27b0;
-    }
-
-    .status-coming {
-      background: rgba(76, 175, 80, 0.2);
-      color: #4caf50;
-      border: 1px solid #4caf50;
-    }
-
-    @keyframes wipPulse {
-      0%, 100% { opacity: 0.7; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.05); }
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
     .card-image {
@@ -584,57 +272,32 @@
       justify-content: center;
       position: relative;
       overflow: hidden;
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
 
-    .card-image::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.3), transparent);
-      transform: rotate(45deg);
-      transition: transform 0.6s ease;
-      opacity: 0;
-    }
-
-    .card:hover .card-image::before {
-      transform: rotate(45deg) translate(50px, 50px);
-      opacity: 1;
+    .card:hover .card-image {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
     }
 
     .card-image img {
       width: 80px;
       height: 80px;
       object-fit: contain;
-      transition: all 0.3s ease;
-    }
-
-    .card:hover .card-image img {
-      transform: scale(1.1) rotate(5deg);
-    }
-
-    /* Placeholder for missing images */
-    .card-image.placeholder {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      font-size: 3em;
-      font-weight: bold;
     }
 
     .card h2 {
-      font-size: 1.4em;
+      font-size: 1.5em;
       margin-bottom: 15px;
       color: #fff;
       font-weight: 600;
-      position: relative;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
     .card p {
       font-size: 0.95em;
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(255, 255, 255, 0.8);
       line-height: 1.6;
       margin-bottom: 25px;
       min-height: 48px;
@@ -646,157 +309,113 @@
     .card-button {
       display: inline-block;
       padding: 12px 30px;
-      background: linear-gradient(45deg, #00ff88, #0066ff);
-      color: #000;
+      background: rgba(255, 255, 255, 0.9);
+      color: #0a1628;
       text-decoration: none;
       border-radius: 25px;
       font-weight: 600;
-      position: relative;
-      overflow: hidden;
       transition: all 0.3s ease;
-      box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
-    }
-
-    .card-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-      transition: left 0.5s ease;
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
     }
 
     .card-button:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.5);
-    }
-
-    .card-button:hover::before {
-      left: 100%;
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+      background: #fff;
     }
 
     .card-button.disabled {
-      background: linear-gradient(45deg, #555, #777);
+      background: rgba(255, 255, 255, 0.2);
       cursor: not-allowed;
-      opacity: 0.7;
+      opacity: 0.6;
       color: #fff;
     }
 
-    .card-button.disabled:hover {
-      transform: none;
-      box-shadow: none;
+    .character-harsha-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 60px;
+      padding: 80px 20px;
+      position: relative;
+      z-index: 2;
+      flex-wrap: wrap;
     }
 
-    /* harsha split effect */
+    #character-container {
+      width: 400px;
+      height: 400px;
+      position: relative;
+    }
+
     .harsha-split-effect {
-        position: relative;
-        display: inline-block;
+      position: relative;
+      display: inline-block;
     }
 
     .harsha-split-effect h2 {
-        margin: 0; 
-        padding: 0;
-        position: relative;
-        font-size: 6em; 
-        color: transparent;
-        text-transform: uppercase;
-        cursor: pointer;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      font-size: 6em;
+      color: transparent;
+      text-transform: uppercase;
+      cursor: pointer;
     }
 
     .harsha-split-effect h2 span:nth-child(1) {
-        position: absolute;
-        top: 0; 
-        left: 0; 
-        color: #fff;
-        transition: 0.5s ease;
-        clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
-        overflow: hidden;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #fff;
+      transition: 0.5s ease;
+      clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+      overflow: hidden;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
     }
 
     .harsha-split-effect:hover h2 span:nth-child(1) {
-        transform: translateY(-18px); 
+      transform: translateY(-18px);
     }
 
     .harsha-split-effect h2 span:nth-child(2) {
-        position: absolute;
-        top: 0; 
-        left: 0; 
-        color: #fff;
-        transition: 0.5s ease;
-        clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
-        overflow: hidden;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #fff;
+      transition: 0.5s ease;
+      clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+      overflow: hidden;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
     }
 
     .harsha-split-effect:hover h2 span:nth-child(2) {
-        transform: translateY(18px); 
+      transform: translateY(18px);
     }
 
     .harsha-split-effect h2 span:nth-child(3) {
-        position: absolute;
-        top: 50%; 
-        left: 0;
-        transform: translateY(-50%) scaleY(0);
-        width: 91%; 
-        color: #333;
-        background: linear-gradient(45deg, #ffd700, #ffed4e);
-        font-size: 0.25em; 
-        font-weight: 500;
-        letter-spacing: 0.7em;
-        text-align: center;
-        padding: 8px 10px; 
-        margin-left: 5px;
-        transition: 0.5s ease;
-        border-radius: 4px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%) scaleY(0);
+      width: 91%;
+      color: #0a1628;
+      background: rgba(255, 255, 255, 0.95);
+      font-size: 0.25em;
+      font-weight: 500;
+      letter-spacing: 0.7em;
+      text-align: center;
+      padding: 8px 10px;
+      margin-left: 5px;
+      transition: 0.5s ease;
+      border-radius: 4px;
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
     }
 
     .harsha-split-effect:hover h2 span:nth-child(3) {
-        transform: translateY(-50%) scaleY(1);
+      transform: translateY(-50%) scaleY(1);
     }
 
-    .harsha-split-effect {
-      display: flex;
-      justify-content: center;
-      position: relative;
-      padding: 20px;
-      z-index: 2;
-    }
-
-    /* Shimmer effect for subtitle */
-    .shimmer {
-      font-family: "Lato", sans-serif;
-      font-weight: 300;
-      font-size: 1.3em;
-      color: rgba(255, 255, 255, 0.1);
-      text-align: center;
-      display: inline-block;
-      background: linear-gradient(to right, #222 0%, #fff 50%, #222 100%);
-      background-size: 125px 100%;
-      background-repeat: no-repeat;
-      background-position: 0 0;
-      background-color: #222;
-      -webkit-background-clip: text;
-      -moz-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      -moz-text-fill-color: transparent;
-      animation: shimmer 2s infinite;
-    }
-
-    @keyframes shimmer {
-      0% {
-        background-position: left top;
-      }
-      100% {
-        background-position: right top;
-      }
-    }
-
-    /* TextScramble styles */
     .text-scramble-container {
       text-align: center;
       padding: 40px 20px;
@@ -805,10 +424,10 @@
     }
 
     .text {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-weight: 300;
       font-size: 1.2em;
-      color: #fff;
+      color: rgba(255, 255, 255, 0.9);
       line-height: 1.6;
       max-width: 600px;
       margin: 0 auto;
@@ -819,25 +438,33 @@
     }
 
     .dud {
-      color: #757575;
+      color: rgba(255, 255, 255, 0.3);
     }
 
     footer {
       text-align: center;
       padding: 40px 20px;
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(10, 22, 40, 0.8);
       backdrop-filter: blur(10px);
       color: rgba(255, 255, 255, 0.6);
       font-size: 1em;
       margin-top: 40px;
       position: relative;
       z-index: 2;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* Responsive design */
     @media (max-width: 1200px) {
-      .container {
-        grid-template-columns: repeat(3, 1fr);
+      .character-harsha-section {
+        flex-direction: column;
+        gap: 40px;
+      }
+      #character-container {
+        width: 350px;
+        height: 350px;
+      }
+      .harsha-split-effect h2 {
+        font-size: 5em;
       }
     }
 
@@ -845,14 +472,12 @@
       .mobile-menu-toggle {
         display: block;
       }
-      
       .navbar ul {
         position: fixed;
         top: 100%;
         left: 0;
         width: 100%;
-        background: rgba(0, 0, 0, 0.95);
-        backdrop-filter: blur(15px);
+        background: rgba(10, 22, 40, 0.95);
         flex-direction: column;
         gap: 0;
         padding: 20px 0;
@@ -860,222 +485,52 @@
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
       }
-      
       .navbar ul.active {
         transform: translateY(0);
         opacity: 1;
         visibility: visible;
       }
-      
-      .navbar ul li {
-        width: 100%;
-        text-align: center;
-      }
-      
-      .navbar ul li a {
-        display: block;
-        padding: 15px 20px;
-        width: 100%;
-        border-radius: 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        min-height: 50px;
-      }
-      
-      .navbar ul li a:hover {
-        background: rgba(0, 229, 255, 0.1);
-      }
-      
-      .hero {
-        padding: 60px 20px 40px;
-      }
-      
       .hero h1 {
         font-size: 2.8em;
-        line-height: 1.1;
       }
-      
-      .hero p {
-        font-size: 1.1em;
-      }
-
-      .app-notice {
-        margin: 30px 20px;
-        padding: 20px;
-      }
-
-      .app-notice h3 {
-        font-size: 1.2em;
-      }
-
-      .app-notice p {
-        font-size: 1em;
-      }
-      
       .container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        padding: 30px 20px;
+        padding: 40px 20px;
       }
-      
-      .card {
-        padding: 20px;
+      #character-container {
+        width: 280px;
+        height: 280px;
       }
-      
-      .card-image {
-        width: 100px;
-        height: 100px;
-      }
-      
-      .card h2 {
-        font-size: 1.2em;
-      }
-      
-      .card p {
-        font-size: 0.9em;
-        min-height: 60px;
-      }
-
-      .status-tag {
-        font-size: 0.7em;
-        padding: 4px 8px;
-        top: 10px;
-        right: 10px;
-      }
-
-      .shimmer {
-        font-size: 1.1em;
-      }
-
-      .text {
-        font-size: 1.1em;
-        max-width: 90%;
-      }
-      
-      .text-scramble-container {
-        padding: 30px 15px;
-      }
-      
-      .neural-node {
-        width: 3px;
-        height: 3px;
+      .harsha-split-effect h2 {
+        font-size: 3.5em;
       }
     }
 
     @media (max-width: 480px) {
-      .navbar {
-        padding: 15px 20px;
-      }
-      
-      .navbar .logo {
-        font-size: 1.5em;
-      }
-      
       .hero h1 {
         font-size: 2.2em;
       }
-      
-      .hero p {
-        font-size: 1em;
-      }
-
-      .app-notice {
-        margin: 20px 15px;
-        padding: 15px;
-      }
-
-      .app-notice-icon {
-        font-size: 1.5em;
-      }
-
-      .app-notice h3 {
-        font-size: 1.1em;
-      }
-
-      .app-notice p {
-        font-size: 0.9em;
-      }
-      
       .container {
         grid-template-columns: 1fr;
-        gap: 15px;
-        padding: 20px 15px;
       }
-      
-      .card {
-        padding: 15px;
+      #character-container {
+        width: 250px;
+        height: 250px;
       }
-      
-      .card-image {
-        width: 80px;
-        height: 80px;
-      }
-      
-      .card h2 {
-        font-size: 1.1em;
-      }
-      
-      .card p {
-        font-size: 0.85em;
-        min-height: 50px;
-      }
-      
-      .card-button {
-        padding: 8px 20px;
-        font-size: 0.9em;
-      }
-
-      .status-tag {
-        font-size: 0.65em;
-        padding: 3px 6px;
-      }
-
-      .shimmer {
-        font-size: 1em;
-      }
-
-      .text {
-        font-size: 1em;
-      }
-      
-      .text-scramble-container {
-        padding: 25px 10px;
-      }
-      
-      .neural-node {
-        width: 2px;
-        height: 2px;
+      .harsha-split-effect h2 {
+        font-size: 3em;
       }
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Anton:wght@400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
-  <link rel="icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Custom Cursor -->
+  <canvas id="starfield"></canvas>
   <div class="cursor" id="cursor"></div>
   <div class="cursor-follower" id="cursor-follower"></div>
 
-  <!-- Particle System Container -->
-  <div class="particle-container" id="particleContainer"></div>
-
-  <!-- Neural Network Container -->
-  <div class="neural-network" id="neuralNetwork"></div>
-
-  <!-- Floating Elements -->
-  <div class="floating-elements">
-    <div class="floating-shape"></div>
-    <div class="floating-shape"></div>
-    <div class="floating-shape"></div>
-    <div class="floating-shape"></div>
-    <div class="floating-shape"></div>
-  </div>
-
   <nav class="navbar" id="navbar">
-    <div class="logo">🚀 My Apps</div>
+    <div class="logo">🚀 Harsha's Apps</div>
     <button class="mobile-menu-toggle" id="mobile-menu-toggle">
       <span></span>
       <span></span>
@@ -1092,61 +547,60 @@
 
   <section class="hero" id="home">
     <h1>Turning Ideas Into Apps</h1>
-    <p class="shimmer">A stunning showcase of innovative applications</p>
+    <p>A creative showcase of innovative applications</p>
   </section>
-  
-  <!-- App Status Notice -->
+
   <div class="app-notice">
     <div class="app-notice-icon">⚡</div>
     <h3>SYSTEM STATUS</h3>
     <p>Applications are powered by quantum-level cloud infrastructure. Some apps may enter sleep mode - simply activate them and witness the magic unfold.</p>
     <p>Thank you for your understanding! 🙏</p>
   </div>
-  
+
   <div class="container" id="apps">
     <div class="card">
       <div class="card-image">
-        <img src="assets/Quickquery.png" alt="QuickQuery" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'card-image placeholder\'>QQ</div>'; this.parentElement.className='card-image placeholder';">
+        <img src="assets/Quickquery.png" alt="QuickQuery">
       </div>
       <h2>QuickQuery</h2>
       <p>Find Answers Inside Your Documents.</p>
       <a href="https://quickquery.streamlit.app" target="_blank" class="card-button">Open App</a>
     </div>
-    
+
     <div class="card">
-      <div class="status-tag status-wip">Work in Progress</div>
+      <div class="status-tag">Work in Progress</div>
       <div class="card-image">
-        <img src="assets/stepbeyond.png" alt="StepBeyond" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'card-image placeholder\'>SB</div>'; this.parentElement.className='card-image placeholder';">
+        <img src="assets/stepbeyond.png" alt="StepBeyond">
       </div>
       <h2>StepBeyond</h2>
       <p>Your AI-Powered Study Abroad Counselor.</p>
       <a href="https://stepbeyond-yavx.onrender.com" target="_blank" class="card-button">Open App</a>
     </div>
-    
+
     <div class="card">
-      <div class="status-tag status-auth">Auth Required</div>
+      <div class="status-tag">Auth Required</div>
       <div class="card-image">
-        <img src="assets/khelruyt.png" alt="Khelruyt" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'card-image placeholder\'>KR</div>'; this.parentElement.className='card-image placeholder';">
+        <img src="assets/khelruyt.png" alt="Khelruyt">
       </div>
       <h2>Khelruyt</h2>
       <p>Simplifying event management for the Khelruyt.</p>
       <a href="https://khelruyt.onrender.com/" target="_blank" class="card-button">Open App</a>
     </div>
-    
+
     <div class="card">
-      <div class="status-tag status-wip">Work in Progress</div>
+      <div class="status-tag">Work in Progress</div>
       <div class="card-image">
-        <img src="assets/smartmeet.png" alt="SmartMeet" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'card-image placeholder\'>SM</div>'; this.parentElement.className='card-image placeholder';">
+        <img src="assets/smartmeet.png" alt="SmartMeet">
       </div>
       <h2>SmartMeet</h2>
       <p>Intelligent Meeting Scheduling Assistant.</p>
       <a href="https://smartmeet.onrender.com/" target="_blank" class="card-button">Open App</a>
     </div>
-    
+
     <div class="card">
-      <div class="status-tag status-auth">Work in Progress</div>
+      <div class="status-tag">Work in Progress</div>
       <div class="card-image">
-        <img src="assets/harsha_1.png" alt="AskHarsha" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'card-image placeholder\'>AH</div>'; this.parentElement.className='card-image placeholder';">
+        <img src="assets/harsha_1.png" alt="AskHarsha">
       </div>
       <h2>AskHarsha</h2>
       <p>AskHarsha is my personal knowledge hub.</p>
@@ -1155,7 +609,7 @@
 
     <div class="card">
       <div class="card-image">
-        <img src="assets/essential.png" alt="Essential" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'card-image placeholder\'>ES</div>'; this.parentElement.className='card-image placeholder';">
+        <img src="assets/essential.png" alt="Essential">
       </div>
       <h2>Essential</h2>
       <p>Essential now includes OCR, turning long documents into clear, time-saving summaries with key insights.</p>
@@ -1164,17 +618,17 @@
 
     <div class="card">
       <div class="card-image">
-        <img src="assets/default_elephant.png" alt="HelloJumbo" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'card-image placeholder\'>HJ</div>'; this.parentElement.className='card-image placeholder';">
+        <img src="assets/default_elephant.png" alt="HelloJumbo">
       </div>
       <h2>HelloJumbo</h2>
       <p>A friend to listen, remember, and support you through whatever you're experiencing.</p>
       <a href="https://hellojumbo.streamlit.app" target="_blank" class="card-button">Open App</a>
     </div>
-    
+
     <div class="card">
-      <div class="status-tag status-wip">Work in Progress</div>      
+      <div class="status-tag">Work in Progress</div>
       <div class="card-image">
-        <img src="assets/Memoria_Logo.png" alt="Memoria" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'card-image placeholder\'>ME</div>'; this.parentElement.className='card-image placeholder';">
+        <img src="assets/Memoria_Logo.png" alt="Memoria">
       </div>
       <h2>Memoria</h2>
       <p>Personal Cloud Storage Manager.</p>
@@ -1182,43 +636,41 @@
     </div>
   </div>
 
-  <!-- HARSHA Name with Glow Effect -->
-  <div class="harsha-split-effect">
-    <h2>
-      HARSHA 
-      <span> HARSHA </span>
-      <span> HARSHA </span>
-      <span>Vibe Coder</span>
-    </h2>
+  <div class="character-harsha-section">
+    <div id="character-container"></div>
+    <div class="harsha-split-effect">
+      <h2>
+        HARSHA
+        <span>HARSHA</span>
+        <span>HARSHA</span>
+        <span>Vibe Coder</span>
+      </h2>
+    </div>
   </div>
 
-  <!-- TextScramble Section -->
   <div class="text-scramble-container">
     <div class="text"></div>
   </div>
 
-  <!-- LikeBtn.com BEGIN -->
   <div style="text-align: center; padding: 20px 0; position: relative; z-index: 3;">
     <span class="likebtn-wrapper" data-i18n_like="ShowLove" data-ef_voting="bounce" data-white_label="true" data-rich_snippet="true" data-identifier="love"></span>
   </div>
   <script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
-  <!-- LikeBtn.com END -->
 
   <footer>
     © 2025 Harsha | Powered by GitHub Pages
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-    // Custom Cursor
+    // Cursor
     const cursor = document.getElementById('cursor');
     const cursorFollower = document.getElementById('cursor-follower');
-    let mouseX = 0, mouseY = 0;
-    let followerX = 0, followerY = 0;
+    let mouseX = 0, mouseY = 0, followerX = 0, followerY = 0;
 
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      
       cursor.style.left = mouseX + 'px';
       cursor.style.top = mouseY + 'px';
     });
@@ -1226,258 +678,203 @@
     function updateFollower() {
       followerX += (mouseX - followerX) * 0.1;
       followerY += (mouseY - followerY) * 0.1;
-      
       cursorFollower.style.left = followerX + 'px';
       cursorFollower.style.top = followerY + 'px';
-      
       requestAnimationFrame(updateFollower);
     }
     updateFollower();
 
-    // Enhanced Particle System Class
-    class ParticleSystem {
+    // Starfield with Shooting Stars
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    class Star {
       constructor() {
-        this.container = document.getElementById('particleContainer');
-        this.particles = [];
-        this.colors = [
-          '#00ff88', '#0066ff', '#ff0088', '#8800ff', 
-          '#ffaa00', '#ff6347', '#00ff7f', '#da70d6'
-        ];
-        this.init();
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2;
+        this.speedY = Math.random() * 0.05;
+        this.opacity = Math.random();
+        this.twinkleSpeed = Math.random() * 0.02 + 0.01;
       }
 
-      init() {
-        this.createParticles(100);
-        this.animate();
-      }
-
-      createParticles(count) {
-        for (let i = 0; i < count; i++) {
-          this.createParticle();
+      update() {
+        this.opacity += this.twinkleSpeed;
+        if (this.opacity > 1 || this.opacity < 0) this.twinkleSpeed *= -1;
+        this.y += this.speedY;
+        if (this.y > canvas.height) {
+          this.y = 0;
+          this.x = Math.random() * canvas.width;
         }
       }
 
-      createParticle() {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        const size = Math.random() * 4 + 1;
-        const x = Math.random() * window.innerWidth;
-        const y = Math.random() * window.innerHeight;
-        const color = this.colors[Math.floor(Math.random() * this.colors.length)];
-        const speed = Math.random() * 1.5 + 0.5;
-        const direction = Math.random() * 360;
-        
-        const particleTypes = ['', 'glow', 'trail'];
-        const type = particleTypes[Math.floor(Math.random() * particleTypes.length)];
-        if (type) particle.classList.add(type);
-        
-        particle.style.width = size + 'px';
-        particle.style.height = size + 'px';
-        particle.style.left = x + 'px';
-        particle.style.top = y + 'px';
-        particle.style.background = color;
-        particle.style.color = color;
-        particle.style.animationDelay = Math.random() * 8 + 's';
-        particle.style.animationDuration = (6 + Math.random() * 4) + 's';
-        
-        this.container.appendChild(particle);
-        
-        const particleObj = {
-          element: particle,
-          x: x,
-          y: y,
-          vx: Math.cos(direction * Math.PI / 180) * speed,
-          vy: Math.sin(direction * Math.PI / 180) * speed,
-          size: size,
-          color: color,
-          life: 1,
-          maxLife: Math.random() * 5 + 5
-        };
-        
-        this.particles.push(particleObj);
-      }
-
-      animate() {
-        this.particles.forEach((particle) => {
-          particle.x += particle.vx;
-          particle.y += particle.vy;
-          
-          // Mouse interaction
-          const distance = Math.sqrt(
-            Math.pow(particle.x - mouseX, 2) + Math.pow(particle.y - mouseY, 2)
-          );
-          
-          if (distance < 100) {
-            const force = (100 - distance) / 1000;
-            const angle = Math.atan2(mouseY - particle.y, mouseX - particle.x);
-            particle.vx += Math.cos(angle) * force;
-            particle.vy += Math.sin(angle) * force;
-          }
-          
-          if (particle.x <= 0 || particle.x >= window.innerWidth - particle.size) {
-            particle.vx *= -0.8;
-            particle.x = Math.max(0, Math.min(window.innerWidth - particle.size, particle.x));
-          }
-          if (particle.y <= 0 || particle.y >= window.innerHeight - particle.size) {
-            particle.vy *= -0.8;
-            particle.y = Math.max(0, Math.min(window.innerHeight - particle.size, particle.y));
-          }
-          
-          particle.vy += 0.01;
-          particle.vx *= 0.999;
-          particle.vy *= 0.999;
-          
-          particle.element.style.left = particle.x + 'px';
-          particle.element.style.top = particle.y + 'px';
-          
-          particle.life -= 0.003;
-          if (particle.life <= 0) {
-            particle.x = Math.random() * window.innerWidth;
-            particle.y = Math.random() * window.innerHeight;
-            particle.vx = (Math.random() - 0.5) * 3;
-            particle.vy = (Math.random() - 0.5) * 3;
-            particle.life = 1;
-            particle.color = this.colors[Math.floor(Math.random() * this.colors.length)];
-            particle.element.style.background = particle.color;
-            particle.element.style.color = particle.color;
-          }
-        });
-        
-        requestAnimationFrame(() => this.animate());
+      draw() {
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
       }
     }
 
-    // Enhanced Neural Network Class
-    class NeuralNetwork {
+    class ShootingStar {
       constructor() {
-        this.container = document.getElementById('neuralNetwork');
-        this.nodes = [];
-        this.connections = [];
-        this.nodeCount = 50;
-        this.connectionProbability = 0.15;
-        this.init();
+        this.reset();
       }
 
-      init() {
-        this.createNodes();
-        this.createConnections();
-        this.startDataPulses();
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height * 0.5;
+        this.length = Math.random() * 80 + 40;
+        this.speed = Math.random() * 8 + 6;
+        this.opacity = 1;
+        this.angle = Math.PI / 4;
       }
 
-      createNodes() {
-        for (let i = 0; i < this.nodeCount; i++) {
-          const node = document.createElement('div');
-          node.className = 'neural-node';
-          
-          const nodeTypes = ['', 'secondary', 'tertiary'];
-          const type = nodeTypes[Math.floor(Math.random() * nodeTypes.length)];
-          if (type) node.classList.add(type);
-          
-          const x = Math.random() * (window.innerWidth - 20) + 10;
-          const y = Math.random() * (window.innerHeight - 20) + 10;
-          
-          node.style.left = x + 'px';
-          node.style.top = y + 'px';
-          node.style.animationDelay = Math.random() * 4 + 's';
-          
-          this.container.appendChild(node);
-          
-          this.nodes.push({
-            element: node,
-            x: x,
-            y: y,
-            connections: []
-          });
+      update() {
+        this.x += Math.cos(this.angle) * this.speed;
+        this.y += Math.sin(this.angle) * this.speed;
+        this.opacity -= 0.015;
+        
+        if (this.opacity <= 0 || this.x > canvas.width || this.y > canvas.height) {
+          this.reset();
+          this.opacity = 0;
         }
       }
 
-      createConnections() {
-        for (let i = 0; i < this.nodes.length; i++) {
-          for (let j = i + 1; j < this.nodes.length; j++) {
-            const nodeA = this.nodes[i];
-            const nodeB = this.nodes[j];
-            const distance = Math.sqrt(
-              Math.pow(nodeA.x - nodeB.x, 2) + Math.pow(nodeA.y - nodeB.y, 2)
-            );
-            
-            if (distance < 200 && Math.random() < this.connectionProbability) {
-              this.createConnection(nodeA, nodeB, distance);
-            }
-          }
-        }
-      }
-
-      createConnection(nodeA, nodeB, distance) {
-        const connection = document.createElement('div');
-        connection.className = 'neural-connection';
+      draw() {
+        if (this.opacity <= 0) return;
         
-        const connectionTypes = ['', 'secondary', 'tertiary'];
-        const type = connectionTypes[Math.floor(Math.random() * connectionTypes.length)];
-        if (type) connection.classList.add(type);
-        
-        const angle = Math.atan2(nodeB.y - nodeA.y, nodeB.x - nodeA.x);
-        
-        connection.style.left = nodeA.x + 'px';
-        connection.style.top = nodeA.y + 'px';
-        connection.style.width = distance + 'px';
-        connection.style.transform = `rotate(${angle}rad)`;
-        connection.style.animationDelay = Math.random() * 6 + 's';
-        
-        this.container.appendChild(connection);
-        
-        nodeA.connections.push({ element: connection, target: nodeB, distance });
-        this.connections.push({ element: connection, nodeA, nodeB, distance });
-      }
-
-      startDataPulses() {
-        setInterval(() => {
-          if (this.connections.length > 0) {
-            const randomConnection = this.connections[Math.floor(Math.random() * this.connections.length)];
-            this.createDataPulse(randomConnection);
-          }
-        }, 500);
-      }
-
-      createDataPulse(connection) {
-        const pulse = document.createElement('div');
-        pulse.className = 'data-pulse';
-        pulse.style.left = connection.nodeA.x + 'px';
-        pulse.style.top = connection.nodeA.y + 'px';
-        
-        const angle = Math.atan2(
-          connection.nodeB.y - connection.nodeA.y,
-          connection.nodeB.x - connection.nodeA.x
+        const gradient = ctx.createLinearGradient(
+          this.x, this.y,
+          this.x - Math.cos(this.angle) * this.length,
+          this.y - Math.sin(this.angle) * this.length
         );
-        pulse.style.transform = `rotate(${angle}rad)`;
+        gradient.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`);
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
         
-        this.container.appendChild(pulse);
-        
-        pulse.animate([
-          {
-            transform: `rotate(${angle}rad) translateX(0)`,
-            opacity: 0
-          },
-          {
-            transform: `rotate(${angle}rad) translateX(${connection.distance/4}px)`,
-            opacity: 1
-          },
-          {
-            transform: `rotate(${angle}rad) translateX(${connection.distance}px)`,
-            opacity: 0
-          }
-        ], {
-          duration: 2000,
-          easing: 'ease-out'
-        }).onfinish = () => pulse.remove();
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(
+          this.x - Math.cos(this.angle) * this.length,
+          this.y - Math.sin(this.angle) * this.length
+        );
+        ctx.stroke();
       }
     }
 
-    // Initialize systems
-    const particleSystem = new ParticleSystem();
-    const neuralNetwork = new NeuralNetwork();
+    const stars = Array.from({ length: 200 }, () => new Star());
+    const shootingStars = [];
+    let lastShootingStarTime = 0;
 
-    // Scroll Effects
+    function animateStarfield() {
+      ctx.fillStyle = 'rgba(10, 22, 40, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      stars.forEach(star => {
+        star.update();
+        star.draw();
+      });
+
+      const currentTime = Date.now();
+      if (currentTime - lastShootingStarTime > Math.random() * 5000 + 5000) {
+        shootingStars.push(new ShootingStar());
+        lastShootingStarTime = currentTime;
+      }
+
+      shootingStars.forEach((star, index) => {
+        star.update();
+        star.draw();
+        if (star.opacity <= 0) shootingStars.splice(index, 1);
+      });
+
+      requestAnimationFrame(animateStarfield);
+    }
+    animateStarfield();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    // 3D Character
+    const container = document.getElementById('character-container');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    
+    renderer.setSize(400, 400);
+    renderer.setClearColor(0x000000, 0);
+    container.appendChild(renderer.domElement);
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    scene.add(ambientLight);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    directionalLight.position.set(5, 5, 5);
+    scene.add(directionalLight);
+
+    let model;
+    const loader = new THREE.GLTFLoader();
+    
+    loader.load('assets/harsha.glb',
+      (gltf) => {
+        model = gltf.scene;
+        scene.add(model);
+        
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const scale = 2 / maxDim;
+        model.scale.multiplyScalar(scale);
+        
+        model.position.sub(center.multiplyScalar(scale));
+      },
+      undefined,
+      (error) => {
+        console.error('Error loading model:', error);
+      }
+    );
+
+    camera.position.z = 3;
+
+    let targetRotationY = 0;
+    let targetRotationX = 0;
+    let normalizedMouseX = 0;
+    let normalizedMouseY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      normalizedMouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      normalizedMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+      
+      targetRotationY = normalizedMouseX * 0.5;
+      targetRotationX = normalizedMouseY * 0.3;
+    });
+
+    function animate3D() {
+      requestAnimationFrame(animate3D);
+      
+      if (model) {
+        model.rotation.y += (targetRotationY - model.rotation.y) * 0.05;
+        model.rotation.x += (targetRotationX - model.rotation.x) * 0.05;
+        model.rotation.y += 0.005;
+      }
+      
+      renderer.render(scene, camera);
+    }
+    animate3D();
+
+    window.addEventListener('resize', () => {
+      const size = Math.min(400, window.innerWidth - 40);
+      renderer.setSize(size, size);
+      camera.aspect = 1;
+      camera.updateProjectionMatrix();
+    });
+
+    // Navbar scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 100) {
@@ -1487,7 +884,7 @@
       }
     });
 
-    // Mobile menu functionality
+    // Mobile menu
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
 
@@ -1496,131 +893,73 @@
       mobileMenu.classList.toggle('active');
     });
 
-    const menuLinks = mobileMenu.querySelectorAll('a');
-    menuLinks.forEach(link => {
+    mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenuToggle.classList.remove('active');
         mobileMenu.classList.remove('active');
       });
     });
 
-    document.addEventListener('click', function(event) {
-      if (!mobileMenuToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
-        mobileMenuToggle.classList.remove('active');
-        mobileMenu.classList.remove('active');
-      }
-    });
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Enhanced hover effects for cards
-    document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('mouseenter', (e) => {
-        // Add random color variation
-        const colors = ['#00ff88', '#0066ff', '#ff0088', '#8800ff'];
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        card.style.setProperty('--hover-color', randomColor);
-        
-        // Create energy burst effect
-        for (let i = 0; i < 15; i++) {
-          const spark = document.createElement('div');
-          spark.style.position = 'absolute';
-          spark.style.width = '2px';
-          spark.style.height = '2px';
-          spark.style.background = randomColor;
-          spark.style.borderRadius = '50%';
-          spark.style.left = '50%';
-          spark.style.top = '50%';
-          spark.style.pointerEvents = 'none';
-          spark.style.zIndex = '1000';
-          
-          const angle = (i / 15) * Math.PI * 2;
-          const distance = 80 + Math.random() * 40;
-          const duration = 800 + Math.random() * 400;
-          
-          card.appendChild(spark);
-          
-          spark.animate([
-            {
-              transform: 'translate(-50%, -50%) scale(1)',
-              opacity: 1
-            },
-            {
-              transform: `translate(-50%, -50%) translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`,
-              opacity: 0
-            }
-          ], {
-            duration: duration,
-            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-          }).onfinish = () => spark.remove();
-        }
-      });
-    });
-
     // TextScramble
     class TextScramble {
       constructor(el) {
-        this.el = el
-        this.chars = '!<>-_\\/[]{}—=+*^?#________'
-        this.update = this.update.bind(this)
+        this.el = el;
+        this.chars = '!<>-_\\/[]{}—=+*^?#________';
+        this.update = this.update.bind(this);
       }
+      
       setText(newText) {
-        const oldText = this.el.innerText
-        const length = Math.max(oldText.length, newText.length)
-        const promise = new Promise((resolve) => this.resolve = resolve)
-        this.queue = []
+        const oldText = this.el.innerText;
+        const length = Math.max(oldText.length, newText.length);
+        const promise = new Promise((resolve) => this.resolve = resolve);
+        this.queue = [];
+        
         for (let i = 0; i < length; i++) {
-          const from = oldText[i] || ''
-          const to = newText[i] || ''
-          const start = Math.floor(Math.random() * 40)
-          const end = start + Math.floor(Math.random() * 40)
-          this.queue.push({ from, to, start, end })
+          const from = oldText[i] || '';
+          const to = newText[i] || '';
+          const start = Math.floor(Math.random() * 40);
+          const end = start + Math.floor(Math.random() * 40);
+          this.queue.push({ from, to, start, end });
         }
-        cancelAnimationFrame(this.frameRequest)
-        this.frame = 0
-        this.update()
-        return promise
+        
+        cancelAnimationFrame(this.frameRequest);
+        this.frame = 0;
+        this.update();
+        return promise;
       }
+      
       update() {
-        let output = ''
-        let complete = 0
+        let output = '';
+        let complete = 0;
+        
         for (let i = 0, n = this.queue.length; i < n; i++) {
-          let { from, to, start, end, char } = this.queue[i]
+          let { from, to, start, end, char } = this.queue[i];
           if (this.frame >= end) {
-            complete++
-            output += to
+            complete++;
+            output += to;
           } else if (this.frame >= start) {
             if (!char || Math.random() < 0.28) {
-              char = this.randomChar()
-              this.queue[i].char = char
+              char = this.randomChar();
+              this.queue[i].char = char;
             }
-            output += `<span class="dud">${char}</span>`
+            output += `<span class="dud">${char}</span>`;
           } else {
-            output += from
+            output += from;
           }
         }
-        this.el.innerHTML = output
+        
+        this.el.innerHTML = output;
+        
         if (complete === this.queue.length) {
-          this.resolve()
+          this.resolve();
         } else {
-          this.frameRequest = requestAnimationFrame(this.update)
-          this.frame++
+          this.frameRequest = requestAnimationFrame(this.update);
+          this.frame++;
         }
       }
+      
       randomChar() {
-        return this.chars[Math.floor(Math.random() * this.chars.length)]
+        return this.chars[Math.floor(Math.random() * this.chars.length)];
       }
     }
 
@@ -1631,42 +970,66 @@
       'Crafting digital symphonies with code and creativity...',
       'Exploring the infinite possibilities of technology...',
       'Transforming complex problems into elegant solutions...'
-    ]
+    ];
 
-    const el = document.querySelector('.text')
-    const fx = new TextScramble(el)
+    const textEl = document.querySelector('.text');
+    const fx = new TextScramble(textEl);
+    let counter = 0;
 
-    let counter = 0
     const next = () => {
       fx.setText(phrases[counter]).then(() => {
-        setTimeout(next, 3000)
-      })
-      counter = (counter + 1) % phrases.length
-    }
+        setTimeout(next, 3000);
+      });
+      counter = (counter + 1) % phrases.length;
+    };
 
-    // Start text scramble after a delay
-    setTimeout(next, 2000)
+    setTimeout(next, 2000);
 
-    // Handle window resize
-    window.addEventListener('resize', () => {
-      setTimeout(() => {
-        document.getElementById('neuralNetwork').innerHTML = '';
-        new NeuralNetwork();
-      }, 100);
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
     });
 
-    // Performance optimization
-    let ticking = false;
-    function updateOnScroll() {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }
-
-    window.addEventListener('scroll', updateOnScroll, { passive: true });
+    // Card hover effects
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        for (let i = 0; i < 12; i++) {
+          const spark = document.createElement('div');
+          spark.style.position = 'absolute';
+          spark.style.width = '2px';
+          spark.style.height = '2px';
+          spark.style.background = 'rgba(255, 255, 255, 0.8)';
+          spark.style.borderRadius = '50%';
+          spark.style.left = '50%';
+          spark.style.top = '50%';
+          spark.style.pointerEvents = 'none';
+          spark.style.zIndex = '1000';
+          
+          const angle = (i / 12) * Math.PI * 2;
+          const distance = 60 + Math.random() * 30;
+          const duration = 600 + Math.random() * 300;
+          
+          card.appendChild(spark);
+          
+          spark.animate([
+            { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+            { 
+              transform: `translate(-50%, -50%) translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`,
+              opacity: 0
+            }
+          ], {
+            duration: duration,
+            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+          }).onfinish = () => spark.remove();
+        }
+      });
+    });
   </script>
 </body>
 </html>
